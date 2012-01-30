@@ -4,9 +4,7 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 **Installing**
 
-1. Install the gem:
-
-    gem install stanford-core-nlp
+1. Install the gem: `gem install stanford-core-nlp`.
 
 2. Download the Stanford Core NLP JAR and model files [here](http://louismullie.com/stanford-core-nlp-english.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.1/gems/stanford-core-nlp-0.x/bin/). This package only includes model files for English; see below for information on adding model files for other languages.
 
