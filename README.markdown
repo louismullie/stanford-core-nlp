@@ -41,7 +41,7 @@ You may also want to load your own classes from the Stanford NLP to do more spec
            'Berlin to discuss a new austerity package. Sarkozy ' +
            'looked pleased, but Merkel was dismayed.'
 
-    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, pos, :lemma, :parse, :ner, :dcoref)
+    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
     text = StanfordCoreNLP::Text.new(text)
     pipeline.annotate(text)
 
