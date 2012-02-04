@@ -46,9 +46,8 @@ module StanfordCoreNLP
   self.jvm_args = ['-Xms512M', '-Xmx1024M']
   # Turn logging off by default.
   self.log_file = nil
-  # Use english by default.
   
-  use(:english) 
+  
   # Use models for a given language. Language can be 
   # supplied as full-length, or ISO-639 2 or 3 letter 
   # code (e.g. :english, :eng or :en will work).
@@ -74,7 +73,10 @@ module StanfordCoreNLP
       end
     end
   end
-
+  
+  # Use english by default.
+  self.use(:english) 
+  
   # Set a model file. Here are the default models for English:
   #
   #    'pos.model' => 'english-left3words-distsim.tagger',
@@ -96,7 +98,7 @@ module StanfordCoreNLP
   def self.set_model(name, file)
     n = name.split('.')[0].intern
     self.model_files[name] = 
-    ModelFolders[n] + file
+    Config::ModelFolders[n] + file
   end
 
   # Whether the classes are initialized or not.
