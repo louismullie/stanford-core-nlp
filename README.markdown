@@ -6,7 +6,7 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 1. Install the gem: `gem install stanford-core-nlp`.
 
-2. Download the Stanford Core NLP JAR and model files. Two package are available with the necessary files: a package for [English only](http://louismullie.com/stanford-core-nlp-english.zip), or a package with models for [all languages](http://louismullie.com/stanford-core-nlp-all.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.1/gems/stanford-core-nlp-0.x/bin/). This package only includes model files for English; see below for information on adding model files for other languages.
+2. Download the Stanford Core NLP JAR and model files. Two package are available with the necessary files: a package for [English only](http://louismullie.com/stanford-core-nlp-english.zip), or a package with models for [all languages](http://louismullie.com/stanford-core-nlp-all.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.1/gems/stanford-core-nlp-0.x/bin/).
 
 **Configuration**
 
@@ -27,7 +27,8 @@ After installing and requiring the gem (`require 'stanford-core-nlp'`), you may 
     StanfordCoreNLP.use(:french)
 
 	# Change a specific model file.
-	StanfordCoreNLP.
+ 	StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
+	
 **Using the gem**
 
     text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
