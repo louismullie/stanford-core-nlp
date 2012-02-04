@@ -11,6 +11,9 @@ module StanfordCoreNLP
     end
     
     def test_all_english
+      # Reset default values to make sure that these features work.
+      StanfordCoreNLP.use(:english)
+      StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
       
       text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
       'Berlin to discuss a new austerity package. Sarkozy ' +
@@ -40,7 +43,7 @@ module StanfordCoreNLP
           puts 'Named entity tag: ' +               token.get(:named_entity_tag).to_s
           # Coreference
           puts 'Coreference cluster id: ' +         token.get(:coref_cluster_id).to_s
-          # Also available: coref, coref_chain, coref_cluster, coref_dest, coref_graph.
+          # Also available: coref_chain, coref_cluster, coref_dest, coref_graph.
           puts
         end
         
