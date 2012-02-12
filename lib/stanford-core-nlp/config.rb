@@ -20,7 +20,15 @@ module StanfordCoreNLP
       :ner => 'classifiers/',
       :dcoref => 'dcoref/'
     }
-
+    
+    # Tag sets used by Stanford for each language.
+    TagSets = {
+      :english => :penn,
+      :german => :negra,
+      :chinese => :penn_chinese,
+      :french => :simple
+    }
+    
     # Default models for all languages.
     Models = {
       :pos => {

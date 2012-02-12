@@ -1,6 +1,6 @@
 module StanfordCoreNLP
 
-  VERSION = '0.1.5'
+  VERSION = '0.1.6'
   require 'stanford-core-nlp/jar_loader'
   require 'stanford-core-nlp/java_wrapper'
   require 'stanford-core-nlp/config'
@@ -46,8 +46,7 @@ module StanfordCoreNLP
   self.jvm_args = ['-Xms512M', '-Xmx1024M']
   # Turn logging off by default.
   self.log_file = nil
-  
-  
+
   # Use models for a given language. Language can be 
   # supplied as full-length, or ISO-639 2 or 3 letter 
   # code (e.g. :english, :eng or :en will work).
@@ -108,6 +107,7 @@ module StanfordCoreNLP
 
   # Load the JARs, create the classes.
   def self.init
+    JarLoader.log(self.log_file) if self.log_file
     self.load_jars unless @@loaded
     self.create_classes
     @@initialized = true
@@ -138,7 +138,6 @@ module StanfordCoreNLP
   def self.load_jars
     JarLoader.jvm_args = self.jvm_args
     JarLoader.jar_path = self.jar_path
-    JarLoader.log(self.log_file) if self.log_file
     JarLoader.load('joda-time.jar')
     JarLoader.load('xom.jar')
     JarLoader.load('stanford-corenlp.jar')

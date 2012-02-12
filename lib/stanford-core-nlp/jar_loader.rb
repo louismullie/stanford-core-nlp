@@ -46,7 +46,7 @@ module StanfordCoreNLP
       self.rjb_initialize
       jar = self.jar_path + jar
       if !::File.readable?(jar)
-        raise "Could not find  JAR file (looking in #{jar})."
+        raise "Could not find JAR file (looking in #{jar})."
       end
       ::Rjb::add_jar(jar)
     end
