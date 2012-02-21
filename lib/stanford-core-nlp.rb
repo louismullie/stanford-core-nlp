@@ -107,7 +107,6 @@ module StanfordCoreNLP
 
   # Load the JARs, create the classes.
   def self.init
-    JarLoader.log(self.log_file) if self.log_file
     self.load_jars unless @@loaded
     self.create_classes
     @@initialized = true
@@ -117,6 +116,7 @@ module StanfordCoreNLP
   # specified JVM flags and StanfordCoreNLP 
   # properties.
   def self.load(*annotators)
+    JarLoader.log(self.log_file)
     self.init unless @@initialized
     # Prepend the JAR path to the model files.
     properties = {}

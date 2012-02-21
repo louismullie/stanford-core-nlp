@@ -12,6 +12,7 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 After installing and requiring the gem (`require 'stanford-core-nlp'`), you may want to set some configuration options (this, however, is not necessary). Here are some examples:
 
+```ruby
     # Set an alternative path to look for the JAR files
     # Default is gem's bin folder.
     StanfordCoreNLP.jar_path = '/path/'
@@ -28,9 +29,11 @@ After installing and requiring the gem (`require 'stanford-core-nlp'`), you may 
 
 	# Change a specific model file.
  	StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
-	
+```
+
 **Using the gem**
 
+```ruby
     text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
            'Berlin to discuss a new austerity package. Sarkozy ' +
            'looked pleased, but Merkel was dismayed.'
@@ -57,6 +60,7 @@ After installing and requiring the gem (`require 'stanford-core-nlp'`), you may 
             # Also of interest: coref, coref_chain, coref_cluster, coref_dest, coref_graph.
         end
     end
+```
 
 > Note: You need to load the StanfordCoreNLP pipeline before using the StanfordCoreNLP::Text class.
 
@@ -66,6 +70,7 @@ A good reference for names of annotations are the Stanford Javadocs for [CoreAnn
 
 You may also want to load your own classes from the Stanford NLP to do more specific tasks. The gem provides an API to do this:
 
+```ruby
     # Default base class is edu.stanford.nlp.pipeline.
     StanfordCoreNLP.load_class('PTBTokenizerAnnotator')  
     puts StanfordCoreNLP::PTBTokenizerAnnotator.inspect
@@ -75,10 +80,7 @@ You may also want to load your own classes from the Stanford NLP to do more spec
     StanfordCoreNLP.load_class('MaxentTagger', 'edu.stanford.nlp.tagger') 
     puts StanfordCoreNLP::MaxentTagger.inspect
       # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
-
-**Current known issues**
-
-The models included with the gem for the NER system are missing two files: "edu/stanford/nlp/models/dcoref/countries" and "edu/stanford/nlp/models/dcoref/statesandprovinces", which I couldn't find anywhere. I will be grateful if somebody could add/e-mail me these files.
+```
 
 **Contributing**
 
