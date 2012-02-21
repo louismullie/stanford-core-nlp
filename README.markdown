@@ -13,53 +13,53 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 After installing and requiring the gem (`require 'stanford-core-nlp'`), you may want to set some configuration options (this, however, is not necessary). Here are some examples:
 
 ```ruby
-    # Set an alternative path to look for the JAR files
-    # Default is gem's bin folder.
-    StanfordCoreNLP.jar_path = '/path/'
+# Set an alternative path to look for the JAR files
+# Default is gem's bin folder.
+StanfordCoreNLP.jar_path = '/path/'
 
-    # Pass some alternative arguments to the Java VM.
-    # Default is ['-Xms512M', '-Xmx1024M'].
-    StanfordCoreNLP.jvm_args = ['-option1', '-option2']
+# Pass some alternative arguments to the Java VM.
+# Default is ['-Xms512M', '-Xmx1024M'].
+StanfordCoreNLP.jvm_args = ['-option1', '-option2']
 
-    # Redirect VM output to log.txt
-    StanfordCoreNLP.log_file = 'log.txt'
+# Redirect VM output to log.txt
+StanfordCoreNLP.log_file = 'log.txt'
 
-    # Use the model files for a different language than English.
-    StanfordCoreNLP.use(:french)
+# Use the model files for a different language than English.
+StanfordCoreNLP.use(:french)
 
-	# Change a specific model file.
- 	StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
+# Change a specific model file.
+StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
 ```
 
 **Using the gem**
 
 ```ruby
-    text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
-           'Berlin to discuss a new austerity package. Sarkozy ' +
-           'looked pleased, but Merkel was dismayed.'
+text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
+   'Berlin to discuss a new austerity package. Sarkozy ' +
+   'looked pleased, but Merkel was dismayed.'
 
-    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
-    text = StanfordCoreNLP::Text.new(text)
-    pipeline.annotate(text)
+pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
+text = StanfordCoreNLP::Text.new(text)
+pipeline.annotate(text)
 
-    text.get(:sentences).each do |sentence|
-        sentence.get(:tokens).each do |token|
-            # Default annotations for all tokens
-            puts token.get(:value).to_s
-            puts token.get(:original_text).to_s
-            puts token.get(:character_offset_begin).to_s
-            puts token.get(:character_offset_end).to_s
-            # POS returned by the tagger
-            puts token.get(:part_of_speech).to_s
-            # Lemma (base form of the token)
-            puts token.get(:lemma).to_s
-            # Named entity tag
-            puts token.get(:named_entity_tag).to_s
-            # Coreference
-            puts token.get(:coref_cluster_id).to_s
-            # Also of interest: coref, coref_chain, coref_cluster, coref_dest, coref_graph.
-        end
-    end
+text.get(:sentences).each do |sentence|
+  sentence.get(:tokens).each do |token|
+    # Default annotations for all tokens
+    puts token.get(:value).to_s
+    puts token.get(:original_text).to_s
+    puts token.get(:character_offset_begin).to_s
+    puts token.get(:character_offset_end).to_s
+    # POS returned by the tagger
+    puts token.get(:part_of_speech).to_s
+    # Lemma (base form of the token)
+    puts token.get(:lemma).to_s
+    # Named entity tag
+    puts token.get(:named_entity_tag).to_s
+    # Coreference
+   puts token.get(:coref_cluster_id).to_s
+    # Also of interest: coref, coref_chain, coref_cluster, coref_dest, coref_graph.
+  end
+end
 ```
 
 > Note: You need to load the StanfordCoreNLP pipeline before using the StanfordCoreNLP::Text class.
@@ -71,15 +71,15 @@ A good reference for names of annotations are the Stanford Javadocs for [CoreAnn
 You may also want to load your own classes from the Stanford NLP to do more specific tasks. The gem provides an API to do this:
 
 ```ruby
-    # Default base class is edu.stanford.nlp.pipeline.
-    StanfordCoreNLP.load_class('PTBTokenizerAnnotator')  
-    puts StanfordCoreNLP::PTBTokenizerAnnotator.inspect
-      # => #<Rjb::Edu_stanford_nlp_pipeline_PTBTokenizerAnnotator>
+# Default base class is edu.stanford.nlp.pipeline.
+StanfordCoreNLP.load_class('PTBTokenizerAnnotator')  
+puts StanfordCoreNLP::PTBTokenizerAnnotator.inspect
+  # => #<Rjb::Edu_stanford_nlp_pipeline_PTBTokenizerAnnotator>
 
-    # Here, we specify another base class.
-    StanfordCoreNLP.load_class('MaxentTagger', 'edu.stanford.nlp.tagger') 
-    puts StanfordCoreNLP::MaxentTagger.inspect
-      # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
+# Here, we specify another base class.
+StanfordCoreNLP.load_class('MaxentTagger', 'edu.stanford.nlp.tagger') 
+puts StanfordCoreNLP::MaxentTagger.inspect
+  # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
 ```
 
 **Contributing**
