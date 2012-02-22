@@ -1,6 +1,6 @@
 **About**
   
-This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that features tokenization, part-of-speech tagging, lemmatization, and parsing for five languages (English, French, German, Arabic and Chinese), as well as named entity recognition and coreference resolution for English.
+This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that provides tokenization, part-of-speech tagging, lemmatization, and parsing for five languages (English, French, German, Arabic and Chinese), as well as named entity recognition and coreference resolution for English.
 
 **Installing**
 
@@ -15,10 +15,15 @@ After installing and requiring the gem (`require 'stanford-core-nlp'`), you may 
 ```ruby
 # Set an alternative path to look for the JAR files
 # Default is gem's bin folder.
-StanfordCoreNLP.jar_path = '/path/'
+StanfordCoreNLP.jar_path = '/path_to_jars/'
+
+# Set an alternative path to look for the model files
+# Default is gem's bin folder.
+StanfordCoreNLP.jar_path = '/path_to_models/'
 
 # Pass some alternative arguments to the Java VM.
-# Default is ['-Xms512M', '-Xmx1024M'].
+# Default is ['-Xms512M', '-Xmx1024M'] (be prepared
+# to take a coffee break).
 StanfordCoreNLP.jvm_args = ['-option1', '-option2']
 
 # Redirect VM output to log.txt

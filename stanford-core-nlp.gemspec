@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/louismullie/stanford-core-nlp'
   s.summary     = %q{ Ruby bindings to the Stanford Core NLP tools. }
   s.description = %q{ High-level Ruby bindings to the Stanford CoreNLP package, a set natural language processing 
-tools for English, including tokenization, part-of-speech tagging, lemmatization, named entity recognition,
-parsing, and coreference resolution. }
+tools that provides tokenization, part-of-speech tagging and parsing for several languages, as well as named entity 
+recognition and coreference resolution for English. }
   
   # Add all files.
   s.files = Dir['lib/**/*'] + Dir['bin/**/*'] + ['README.markdown', 'LICENSE']

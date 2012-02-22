@@ -1,6 +1,7 @@
 module StanfordCoreNLP
 
-  VERSION = '0.1.6'
+  VERSION = '0.1.7'
+  
   require 'stanford-core-nlp/jar_loader'
   require 'stanford-core-nlp/java_wrapper'
   require 'stanford-core-nlp/config'
@@ -30,6 +31,10 @@ module StanfordCoreNLP
     # retrieve annotations using static classes as names.
     # This works around one of the lacunae of Rjb.
     attr_accessor :jar_path
+    # The path to the main folder containing the folders 
+    # with the individual models inside. By default, this
+    # is the same as the JAR path.
+    attr_accessor :model_path
     # The flags for starting the JVM machine. The parser 
     # and named entity recognizer are very memory consuming.
     attr_accessor :jvm_args
@@ -41,6 +46,8 @@ module StanfordCoreNLP
 
   # The default JAR path is the gem's bin folder.
   self.jar_path = File.dirname(__FILE__) + '/../bin/'
+  # The default model path is the same as the JAR path.
+  self.model_path = self.jar_path
   # Load the JVM with a minimum heap size of 512MB and a
   # maximum heap size of 1024MB.
   self.jvm_args = ['-Xms512M', '-Xmx1024M']
@@ -121,10 +128,11 @@ module StanfordCoreNLP
     # Prepend the JAR path to the model files.
     properties = {}
     self.model_files.each do |k,v| 
-      f = self.jar_path + v 
+      f = self.model_path + v 
       unless File.readable?(f)
         raise "Model file #{f} could not be found. " +
-        "You may need to download this file manually and/or set paths properly."
+        "You may need to download this file manually "+
+        " and/or set paths properly."
       else
         properties[k] = f
       end
@@ -133,7 +141,19 @@ module StanfordCoreNLP
     annotators.map { |x| x.to_s }.join(', ')
     CoreNLP.new(get_properties(properties))
   end
-
+  
+  # Once it loads a specific annotator model once, 
+  # the program always loads the same models when 
+  # you make new pipelines and request the annotator 
+  # again, ignoring the changes in models.
+  #
+  # This function kills the JVM and reloads everything
+  # if you need to create a new pipeline with different
+  # models for the same annotators.
+  #def self.reload
+  #  raise 'Not implemented.'
+  #end
+  
   # Load the jars.
   def self.load_jars
     JarLoader.jvm_args = self.jvm_args

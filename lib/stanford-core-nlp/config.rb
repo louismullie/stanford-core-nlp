@@ -31,6 +31,7 @@ module StanfordCoreNLP
     
     # Default models for all languages.
     Models = {
+      
       :pos => {
         :english => 'english-left3words-distsim.tagger',
         :german => 'german-fast.tagger',
@@ -39,6 +40,7 @@ module StanfordCoreNLP
         :chinese  => 'chinese.tagger',
         :xinhua   => nil
       },
+      
       :parser => {
         :english => 'englishPCFG.ser.gz',
         :german => 'germanPCFG.ser.gz',
@@ -47,6 +49,7 @@ module StanfordCoreNLP
         :chinese  => 'chinesePCFG.ser.gz',
         :xinhua   => 'xinhuaPCFG.ser.gz'
       },
+      
       :ner => {
         :english => {
           '3class' => 'all.3class.distsim.crf.ser.gz',
@@ -59,6 +62,7 @@ module StanfordCoreNLP
         :chinese  => {},
         :xinhua   => {}
       },
+      
       :dcoref => {
         :english => {
           'demonym' => 'demonyms.txt',
@@ -80,6 +84,7 @@ module StanfordCoreNLP
         :chinese  => {},
         :xinhua   => {}
       }
+      
       # Models to add.
 
       #"truecase.model" - path towards the true-casing model; default: StanfordCoreNLPModels/truecase/noUN.ser.gz

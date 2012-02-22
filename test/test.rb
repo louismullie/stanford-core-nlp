@@ -7,10 +7,15 @@ module StanfordCoreNLP
     
     def test_load_class
       StanfordCoreNLP.load_class('PTBTokenizerAnnotator')
-      assert_equal true, StanfordCoreNLP::PTBTokenizerAnnotator.respond_to?(:java_methods)
+      assert_equal true, 
+      StanfordCoreNLP::PTBTokenizerAnnotator.
+      respond_to?(:java_methods)
     end
     
     def test_all_english
+      #StanfordCoreNLP.jar_path = '/ruby/gems/treat/bin/stanford/' # Remove for release.
+      #StanfordCoreNLP.model_path = '/ruby/gems/treat/data/stanford/' # Remove for release.
+      # Remove for release.
       # Reset default values to make sure that these features work.
       StanfordCoreNLP.use(:english)
       StanfordCoreNLP.set_model('pos.model', 
