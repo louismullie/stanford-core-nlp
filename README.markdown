@@ -6,7 +6,7 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 1. Install the gem: `gem install stanford-core-nlp`.
 
-2. Download the Stanford Core NLP JAR and model files. Two package are available with the necessary files: a package for [English only](http://louismullie.com/stanford-core-nlp-english.zip), or a package with models for [all languages](http://louismullie.com/stanford-core-nlp-all.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.1/gems/stanford-core-nlp-0.x/bin/).
+2. Download the Stanford Core NLP JAR and model files. Two package are available with the necessary files: a package for [English only](http://louismullie.com/stanford-core-nlp-english.zip), or a package with models for [all languages](http://louismullie.com/stanford-core-nlp-all.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.x/gems/stanford-core-nlp-0.x/bin/).
 
 **Configuration**
 
@@ -19,7 +19,7 @@ StanfordCoreNLP.jar_path = '/path_to_jars/'
 
 # Set an alternative path to look for the model files
 # Default is gem's bin folder.
-StanfordCoreNLP.jar_path = '/path_to_models/'
+StanfordCoreNLP.model_path = '/path_to_models/'
 
 # Pass some alternative arguments to the Java VM.
 # Default is ['-Xms512M', '-Xmx1024M'] (be prepared
