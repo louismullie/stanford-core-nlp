@@ -14,8 +14,6 @@ module StanfordCoreNLP
 
     def test_all_english
 
-      full = false
-
       #StanfordCoreNLP.model_path = '/ruby/gems/treat/models/stanford/'
       #StanfordCoreNLP.jar_path = '/ruby/gems/treat/bin/stanford/'
 
@@ -49,14 +47,12 @@ module StanfordCoreNLP
           last_char << token.get(:character_offset_end).to_s.to_i
           tags << token.get(:part_of_speech).to_s
           lemmas << token.get(:lemma).to_s
-          if full
-            name_tags << token.get(:named_entity_tag).to_s
-            coref_ids << token.get(:coref_cluster_id).to_s
-          end
+          # name_tags << token.get(:named_entity_tag).to_s
+          # coref_ids << token.get(:coref_cluster_id).to_s
         end
 
       end
-
+      
       assert_equal ['Angela Merkel met Nicolas Sarkozy on January 25th ' +
       'in Berlin to discuss a new austerity package.'], sentences
       assert_equal %w[Angela Merkel met Nicolas Sarkozy on
