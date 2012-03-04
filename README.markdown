@@ -2,7 +2,7 @@
 
 **About**
   
-This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that provides tokenization, part-of-speech tagging, lemmatization, and parsing for several languages, as well as named entity recognition and coreference resolution for English.
+This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that provides tokenization, part-of-speech tagging, lemmatization, and parsing for several languages, as well as named entity recognition and coreference resolution for English. This gem is compatible with Ruby 1.9.2 and above.
 
 **Installing**
 
@@ -10,9 +10,9 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 2. Download the Stanford Core NLP JAR and model files. Three different packages are available:
 
-- A [minimal package for English](http://louismullie.com/stanford-core-nlp-minimal.zip) with one tagger model and one parser model for English.
-- A [full package for English](http://louismullie.com/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
-- A [full package for all languages](http://louismullie.com/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German, Arabic and Chinese.
+*A [minimal package for English](http://louismullie.com/stanford-core-nlp-minimal.zip) with one tagger model and one parser model for English.
+*A [full package for English](http://louismullie.com/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
+*A [full package for all languages](http://louismullie.com/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German, Arabic and Chinese.
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. /usr/local/lib/ruby/gems/1.X.x/gems/stanford-core-nlp-0.x/bin/).
 
