@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp-travis.png)](http://travis-ci.org/louismullie/stanford-core-nlp-travis)
+[![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
 
 **About**
   
