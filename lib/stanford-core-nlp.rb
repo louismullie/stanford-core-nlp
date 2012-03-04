@@ -1,7 +1,7 @@
 module StanfordCoreNLP
 
-  VERSION = '0.1.7'
-  
+  VERSION = '0.1.8'
+
   require 'stanford-core-nlp/jar_loader'
   require 'stanford-core-nlp/java_wrapper'
   require 'stanford-core-nlp/config'
@@ -11,31 +11,31 @@ module StanfordCoreNLP
     # with a trailing slash.
     #
     # The structure of the JAR folder must be as follows:
-    # 
+    #
     # Files:
-    # 
+    #
     #  /stanford-core-nlp.jar
     #  /joda-time.jar
-    #  /xom.jar             
+    #  /xom.jar
     #  /bridge.jar*
-    # 
+    #
     # Folders:
     #
     #  /classifiers         # Models for the NER system.
     #  /dcoref              # Models for the coreference resolver.
     #  /taggers             # Models for the POS tagger.
     #  /grammar             # Models for the parser.
-    # 
+    #
     # *The file bridge.jar is a thin JAVA wrapper over the
-    # Stanford Core NLP get() function, which allows to 
+    # Stanford Core NLP get() function, which allows to
     # retrieve annotations using static classes as names.
     # This works around one of the lacunae of Rjb.
     attr_accessor :jar_path
-    # The path to the main folder containing the folders 
+    # The path to the main folder containing the folders
     # with the individual models inside. By default, this
     # is the same as the JAR path.
     attr_accessor :model_path
-    # The flags for starting the JVM machine. The parser 
+    # The flags for starting the JVM machine. The parser
     # and named entity recognizer are very memory consuming.
     attr_accessor :jvm_args
     # A file to redirect JVM output to.
@@ -54,8 +54,8 @@ module StanfordCoreNLP
   # Turn logging off by default.
   self.log_file = nil
 
-  # Use models for a given language. Language can be 
-  # supplied as full-length, or ISO-639 2 or 3 letter 
+  # Use models for a given language. Language can be
+  # supplied as full-length, or ISO-639 2 or 3 letter
   # code (e.g. :english, :eng or :en will work).
   def self.use(language)
     lang = nil
@@ -70,19 +70,19 @@ module StanfordCoreNLP
         n = n.to_s
         n += '.model' if n == 'ner'
         models.each do |m, file|
-          self.model_files["#{n}.#{m}"] = 
+          self.model_files["#{n}.#{m}"] =
           folder + file
         end
       elsif models.is_a?(String)
-        self.model_files["#{n}.model"] = 
+        self.model_files["#{n}.model"] =
         folder + models
       end
     end
   end
-  
+
   # Use english by default.
-  self.use(:english) 
-  
+  self.use(:english)
+
   # Set a model file. Here are the default models for English:
   #
   #    'pos.model' => 'english-left3words-distsim.tagger',
@@ -103,32 +103,40 @@ module StanfordCoreNLP
   #
   def self.set_model(name, file)
     n = name.split('.')[0].intern
-    self.model_files[name] = 
+    self.model_files[name] =
     Config::ModelFolders[n] + file
   end
 
   # Whether the classes are initialized or not.
   @@initialized = false
-  # Whether the JAR files are loaded or not.
-  @@loaded = false
 
   # Load the JARs, create the classes.
   def self.init
-    self.load_jars unless @@loaded
-    self.create_classes
+    unless @@initialized
+      self.load_jars
+      self.load_default_classes
+    end
     @@initialized = true
   end
 
-  # Load a StanfordCoreNLP pipeline with the 
-  # specified JVM flags and StanfordCoreNLP 
+  # Load a StanfordCoreNLP pipeline with the
+  # specified JVM flags and StanfordCoreNLP
   # properties.
   def self.load(*annotators)
-    JarLoader.log(self.log_file)
+
     self.init unless @@initialized
+
     # Prepend the JAR path to the model files.
     properties = {}
-    self.model_files.each do |k,v| 
-      f = self.model_path + v 
+    self.model_files.each do |k,v|
+      found = false
+      annotators.each do |annotator|
+        found = true if k.index(annotator.to_s)
+        break if found
+      end
+      next unless found
+      f = self.model_path + v
+      puts f
       unless File.readable?(f)
         raise "Model file #{f} could not be found. " +
         "You may need to download this file manually "+
@@ -137,14 +145,15 @@ module StanfordCoreNLP
         properties[k] = f
       end
     end
+
     properties['annotators'] =
     annotators.map { |x| x.to_s }.join(', ')
     CoreNLP.new(get_properties(properties))
   end
-  
-  # Once it loads a specific annotator model once, 
-  # the program always loads the same models when 
-  # you make new pipelines and request the annotator 
+
+  # Once it loads a specific annotator model once,
+  # the program always loads the same models when
+  # you make new pipelines and request the annotator
   # again, ignoring the changes in models.
   #
   # This function kills the JVM and reloads everything
@@ -153,26 +162,40 @@ module StanfordCoreNLP
   #def self.reload
   #  raise 'Not implemented.'
   #end
-  
+
   # Load the jars.
   def self.load_jars
+    JarLoader.log(self.log_file)
     JarLoader.jvm_args = self.jvm_args
     JarLoader.jar_path = self.jar_path
     JarLoader.load('joda-time.jar')
     JarLoader.load('xom.jar')
     JarLoader.load('stanford-corenlp.jar')
     JarLoader.load('bridge.jar')
-    @@loaded = true
   end
 
   # Create the Ruby classes corresponding to the StanfordNLP
   # core classes.
-  def self.create_classes
-    const_set(:CoreNLP, Rjb::import('edu.stanford.nlp.pipeline.StanfordCoreNLP'))
-    const_set(:Annotation, Rjb::import('edu.stanford.nlp.pipeline.Annotation'))
-    const_set(:Text, Annotation) # A more intuitive alias.
-    const_set(:Properties, Rjb::import('java.util.Properties'))
-    const_set(:AnnotationBridge, Rjb::import('AnnotationBridge'))
+  def self.load_default_classes
+
+    const_set(:CoreNLP,
+    Rjb::import('edu.stanford.nlp.pipeline.StanfordCoreNLP')
+    )
+
+    self.load_klass 'Annotation'
+    self.load_klass 'Word', 'edu.stanford.nlp.ling'
+
+    self.load_klass 'MaxentTagger', 'edu.stanford.nlp.tagger.maxent'
+
+    self.load_klass 'CRFClassifier', 'edu.stanford.nlp.ie.crf'
+
+    self.load_klass 'Properties', 'java.util'
+    self.load_klass 'ArrayList', 'java.util'
+
+    self.load_klass 'AnnotationBridge', ''
+
+    const_set(:Text, Annotation)
+
   end
 
   # Load a class (e.g. PTBTokenizerAnnotator) in a specific
@@ -198,12 +221,10 @@ module StanfordCoreNLP
   #  - DeterministicCorefAnnotator - implements anaphora resolution using a deterministic model (newer model, use this!).
   #  - NFLAnnotator - implements entity and relation mention extraction for the NFL domain.
   def self.load_class(klass, base = 'edu.stanford.nlp.pipeline')
-    self.load_jars unless @@loaded
-    const_set(klass.intern, Rjb::import("#{base}.#{klass}"))
+    self.init unless @@initialized
+    self.load_klass(klass, base)
   end
 
-# Private helper functions.
-  private
   # HCreate a java.util.Properties object from a hash.
   def self.get_properties(properties)
     props = Properties.new
@@ -213,9 +234,28 @@ module StanfordCoreNLP
     props
   end
 
+  # Get a Java ArrayList binding to pass lists
+  # of tokens to the Stanford Core NLP process.
+  def self.get_list(tokens)
+    list = StanfordCoreNLP::ArrayList.new
+    tokens.each do |t|
+      list.add(StanfordCoreNLP::Word.new(t.to_s))
+    end
+    list
+  end
+
   # Under_case -> CamelCase.
   def self.camel_case(text)
-    text.to_s.gsub(/^[a-z]|_[a-z]/) { |a| a.upcase }.gsub('_', '')
+    text.to_s.gsub(/^[a-z]|_[a-z]/) do |a|
+      a.upcase
+    end.gsub('_', '')
+  end
+
+  private
+  def self.load_klass(klass, base = 'edu.stanford.nlp.pipeline')
+    base += '.' unless base == ''
+    const_set(klass.intern,
+    Rjb::import("#{base}#{klass}"))
   end
 
 end

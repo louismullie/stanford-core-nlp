@@ -4,56 +4,69 @@ require 'stanford-core-nlp'
 
 module StanfordCoreNLP
   class TestStanfordCoreNLP < Test::Unit::TestCase
-    
+
     def test_load_class
       StanfordCoreNLP.load_class('PTBTokenizerAnnotator')
-      assert_equal true, 
+      assert_equal true,
       StanfordCoreNLP::PTBTokenizerAnnotator.
       respond_to?(:java_methods)
     end
-    
-    def test_all_english
-      #StanfordCoreNLP.jar_path = '/ruby/gems/treat/bin/stanford/' # Remove for release.
-      #StanfordCoreNLP.model_path = '/ruby/gems/treat/data/stanford/' # Remove for release.
-      # Remove for release.
-      # Reset default values to make sure that these features work.
-      StanfordCoreNLP.use(:english)
-      StanfordCoreNLP.set_model('pos.model', 
-      'english-left3words-distsim.tagger')
-      
-      text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
-      'Berlin to discuss a new austerity package. Sarkozy ' +
-      'looked pleased, but Merkel was dismayed.'
 
-      pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
+    def test_all_english
+
+      full = false
+
+      #StanfordCoreNLP.model_path = '/ruby/gems/treat/models/stanford/'
+      #StanfordCoreNLP.jar_path = '/ruby/gems/treat/bin/stanford/'
+
+      # Reset default values to make sure
+      # that these features work.
+      StanfordCoreNLP.use(:english)
+      StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
+      StanfordCoreNLP.set_model('parser.model', 'englishPCFG.ser.gz')
+
+      text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
+      'Berlin to discuss a new austerity package.'
+
+      pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse)
       text = StanfordCoreNLP::Text.new(text)
       pipeline.annotate(text)
+
+      sentences = []
       
+      tokens = []
+      tags = []
+      lemmas = []
+      begin_char = []
+      last_char = []
+
       text.get(:sentences).each do |sentence|
-        
-        puts "Sentence: '#{sentence.to_s}.'"
-        puts 'Number of children of the sentence node (first-level): ' + 
-             sentence.get(:tree).num_children.to_s
-        
+
+        sentences << sentence.to_s
         sentence.get(:tokens).each do |token|
-          # Default annotations for all tokens
-          puts 'Token: ' +                          token.get(:value).to_s
-          puts 'Original text: ' +                  token.get(:original_text).to_s
-          puts 'First character\'s position: ' +    token.get(:character_offset_begin).to_s
-          puts 'Second character\'s position: ' +   token.get(:character_offset_end).to_s
-          # POS returned by the tagger
-          puts 'POS: ' +                            token.get(:part_of_speech).to_s
-          # Lemma (base form of the token)
-          puts 'Lemma: ' +                          token.get(:lemma).to_s
-          # Named entity tag
-          puts 'Named entity tag: ' +               token.get(:named_entity_tag).to_s
-          # Coreference
-          puts 'Coreference cluster id: ' +         token.get(:coref_cluster_id).to_s
-          # Also available: coref_chain, coref_cluster, coref_dest, coref_graph.
-          puts
+          tokens << token.get(:value).to_s
+          begin_char << token.get(:character_offset_begin).to_s.to_i
+          last_char << token.get(:character_offset_end).to_s.to_i
+          tags << token.get(:part_of_speech).to_s
+          lemmas << token.get(:lemma).to_s
+          if full
+            name_tags << token.get(:named_entity_tag).to_s
+            coref_ids << token.get(:coref_cluster_id).to_s
+          end
         end
-        
+
       end
+
+      assert_equal ['Angela Merkel met Nicolas Sarkozy on January 25th ' +
+      'in Berlin to discuss a new austerity package.'], sentences
+      assert_equal %w[Angela Merkel met Nicolas Sarkozy on
+      January 25th in Berlin to discuss a new austerity package .], tokens
+      assert_equal %w[Angela Merkel meet Nicolas Sarkozy on
+      January 25th in Berlin to discuss a new austerity package .], lemmas
+      assert_equal %w[NNP NNP VBD NNP NNP IN NNP JJ IN NNP TO VB DT JJ NN NN .], tags
+      assert_equal [0, 7, 14, 18, 26, 34, 37, 45, 50, 53, 60, 63, 71, 73, 77, 87, 94], begin_char
+      assert_equal [6, 13, 17, 25, 33, 36, 44, 49, 52, 59, 62, 70, 72, 76, 86, 94, 95], last_char
+      
     end
   end
 end

@@ -1,16 +1,24 @@
+[![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp-travis.png)](http://travis-ci.org/louismullie/stanford-core-nlp-travis)
+
 **About**
   
-This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that provides tokenization, part-of-speech tagging, lemmatization, and parsing for five languages (English, French, German, Arabic and Chinese), as well as named entity recognition and coreference resolution for English.
+This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools that provides tokenization, part-of-speech tagging, lemmatization, and parsing for several languages, as well as named entity recognition and coreference resolution for English.
 
 **Installing**
 
 1. Install the gem: `gem install stanford-core-nlp`.
 
-2. Download the Stanford Core NLP JAR and model files. Two package are available with the necessary files: a package for [English only](http://louismullie.com/stanford-core-nlp-english.zip), or a package with models for [all languages](http://louismullie.com/stanford-core-nlp-all.zip). Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (typically this is /usr/local/lib/ruby/gems/1.9.x/gems/stanford-core-nlp-0.x/bin/).
+2. Download the Stanford Core NLP JAR and model files. Three different packages are available:
+
+- A [minimal package for English](http://louismullie.com/stanford-core-nlp-minimal.zip) with one tagger model and one parser model for English.
+- A [full package for English](http://louismullie.com/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
+- A [full package for all languages](http://louismullie.com/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German, Arabic and Chinese.
+
+Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. /usr/local/lib/ruby/gems/1.X.x/gems/stanford-core-nlp-0.x/bin/).
 
 **Configuration**
 
-After installing and requiring the gem (`require 'stanford-core-nlp'`), you may want to set some configuration options (this, however, is not necessary). Here are some examples:
+After installing and requiring the gem (`require 'stanford-core-nlp'`), you may want to set some optional configuration options. Here are some examples:
 
 ```ruby
 # Set an alternative path to look for the JAR files
@@ -48,6 +56,8 @@ text = StanfordCoreNLP::Text.new(text)
 pipeline.annotate(text)
 
 text.get(:sentences).each do |sentence|
+  # Syntatical dependencies
+  puts sentence.get(:basic_dependencies).to_s
   sentence.get(:tokens).each do |token|
     # Default annotations for all tokens
     puts token.get(:value).to_s
