@@ -135,14 +135,16 @@ module StanfordCoreNLP
         break if found
       end
       next unless found
+
       f = self.model_path + v
+      
       unless File.readable?(f)
         raise "Model file #{f} could not be found. " +
         "You may need to download this file manually "+
         " and/or set paths properly."
-      else
-        properties[k] = f
       end
+
+      properties[k] = f
     end
 
     properties['annotators'] =
