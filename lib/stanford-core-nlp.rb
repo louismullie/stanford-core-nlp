@@ -1,6 +1,6 @@
 module StanfordCoreNLP
 
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 
   require 'stanford-core-nlp/jar_loader'
   require 'stanford-core-nlp/java_wrapper'
