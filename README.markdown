@@ -6,7 +6,7 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 **Installing**
 
-Firs, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Three different packages are available:
+First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Three different packages are available:
 
 * A [minimal package for English](http://louismullie.com/stanford-core-nlp-minimal.zip) with one tagger model and one parser model for English.
 * A [full package for English](http://louismullie.com/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
