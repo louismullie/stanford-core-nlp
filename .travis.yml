@@ -4,5 +4,5 @@ rvm:
   - 1.9.3
   - rbx-19mode
 before_script: 
-  - sudo wget http://www.louismullie.com/stanford-core-nlp-minimal.zip
+  - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
