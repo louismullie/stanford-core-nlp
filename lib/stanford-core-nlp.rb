@@ -1,42 +1,25 @@
-# The structure of the JAR folder must be as follows:
-#
-# Files:
-#
-#  /stanford-core-nlp.jar
-#  /joda-time.jar
-#  /xom.jar
-#  /bridge.jar*
-#
-# Folders:
-#
-#  /classifiers         # Models for the NER system.
-#  /dcoref              # Models for the coreference resolver.
-#  /taggers             # Models for the POS tagger.
-#  /grammar             # Models for the parser.
-#
-# *The file bridge.jar is a thin JAVA wrapper over the
-# Stanford Core NLP get() function, which allows to
-# retrieve annotations using static classes as names.
-# This works around one of the lacunae of Rjb.
 module StanfordCoreNLP
 
-  VERSION = '0.2.1'
+  VERSION = '0.3.0'
 
   require 'bind-it'
   extend BindIt::Binding
   
   # 
-  # Configuration for BindIt
+  # BindIt Configuration Options
   #
   
   # The path in which to look for the Stanford JAR files,
   # with a trailing slash.
   self.jar_path = File.dirname(__FILE__) + '/../bin/'
-  # Load the JVM with a minimum heap size of 512MB and a
-  # maximum heap size of 1024MB.
+  
+  # Load the JVM with a minimum heap size of 512MB,
+  # and a maximum heap size of 1024MB.
   self.jvm_args = ['-Xms512M', '-Xmx1024M']
+  
   # Turn logging off by default.
   self.log_file = nil
+  
   # Default JAR files to load.
   self.default_jars = [
     'joda-time.jar', 
@@ -44,23 +27,8 @@ module StanfordCoreNLP
     'stanford-corenlp.jar', 
     'bridge.jar'
   ]
+  
   # Default classes to load.
-  # 
-  #  - PTBTokenizingAnnotator - tokenizes the text following Penn Treebank conventions.
-  #  - WordToSentenceAnnotator - splits a sequence of words into a sequence of sentences.
-  #  - POSTaggerAnnotator - annotates the text with part-of-speech tags.
-  #  - MorphaAnnotator - morphological normalizer (generates lemmas).
-  #  - NERAnnotator - annotates the text with named-entity labels.
-  #  - NERCombinerAnnotator - combines several NER models (use this instead of NERAnnotator!).
-  #  - TrueCaseAnnotator - detects the true case of words in free text (useful for all upper or lower case text).
-  #  - ParserAnnotator - generates constituent and dependency trees.
-  #  - NumberAnnotator - recognizes numerical entities such as numbers, money, times, and dates.
-  #  - TimeWordAnnotator - recognizes common temporal expressions, such as "teatime".
-  #  - QuantifiableEntityNormalizingAnnotator - normalizes the content of all numerical entities.
-  #  - SRLAnnotator - annotates predicates and their semantic roles.
-  #  - CorefAnnotator - implements pronominal anaphora resolution using a statistical model (deprecated!).
-  #  - DeterministicCorefAnnotator - implements anaphora resolution using a deterministic model (newer model, use this!).
-  #  - NFLAnnotator - implements entity and relation mention extraction for the NFL domain.
   self.default_classes = [
     ['StanfordCoreNLP', 'edu.stanford.nlp.pipeline', 'CoreNLP'],
     ['Annotation', 'edu.stanford.nlp.pipeline', 'Text'],
@@ -71,6 +39,7 @@ module StanfordCoreNLP
     ['ArrayList', 'java.util'],
     ['AnnotationBridge', '']
   ]
+  
   # Default namespace is the Stanford pipeline namespace.
   self.default_namespace = 'edu.stanford.nlp.pipeline'
 
@@ -118,24 +87,7 @@ module StanfordCoreNLP
   # Use english by default.
   self.use(:english)
 
-  # Set a model file. Here are the default models for English:
-  #
-  #    'pos.model' => 'english-left3words-distsim.tagger',
-  #    'ner.model.3class' => 'all.3class.distsim.crf.ser.gz',
-  #    'ner.model.7class' => 'muc.7class.distsim.crf.ser.gz',
-  #    'ner.model.MISCclass' => 'conll.4class.distsim.crf.ser.gz',
-  #    'parser.model' => 'englishPCFG.ser.gz',
-  #    'dcoref.demonym' => 'demonyms.txt',
-  #    'dcoref.animate' => 'animate.unigrams.txt',
-  #    'dcoref.female' => 'female.unigrams.txt',
-  #    'dcoref.inanimate' => 'inanimate.unigrams.txt',
-  #    'dcoref.male' => 'male.unigrams.txt',
-  #    'dcoref.neutral' => 'neutral.unigrams.txt',
-  #    'dcoref.plural' => 'plural.unigrams.txt',
-  #    'dcoref.singular' => 'singular.unigrams.txt',
-  #    'dcoref.states' => 'state-abbreviations.txt',
-  #    'dcoref.extra.gender' => 'namegender.combine.txt'
-  #
+  # Set a model file. 
   def self.set_model(name, file)
     n = name.split('.')[0].intern
     self.model_files[name] =
