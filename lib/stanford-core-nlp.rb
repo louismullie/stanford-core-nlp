@@ -5,9 +5,9 @@ module StanfordCoreNLP
   require 'bind-it'
   extend BindIt::Binding
   
-  # 
-  # BindIt Configuration Options
-  #
+  # ############################ #
+  # BindIt Configuration Options #
+  # ############################ #
   
   # The path in which to look for the Stanford JAR files,
   # with a trailing slash.
