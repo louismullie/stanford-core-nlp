@@ -1,3 +1,3 @@
 source :rubygems
 gem "rake"
-gem "rjb"
+gem "bind-it"
