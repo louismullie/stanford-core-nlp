@@ -15,9 +15,9 @@ tools that provides tokenization, part-of-speech tagging and parsing for several
 recognition and coreference resolution for English. }
   
   # Add all files.
-  s.files = Dir['lib/**/*'] + Dir['bin/**/*'] + ['README.markdown', 'LICENSE']
+  s.files = Dir['lib/**/*'] + Dir['bin/**/*'] + ['README.md', 'LICENSE']
   
   # Runtime dependencies
-  s.add_runtime_dependency 'rjb'
+  s.add_runtime_dependency 'bind-it'
     
 end
