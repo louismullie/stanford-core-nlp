@@ -95,6 +95,45 @@ puts StanfordCoreNLP::MaxentTagger.inspect
   # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
 ```
 
+**List of annotator classes**
+
+Here is a full list of annotator classes provided by the Stanford Core NLP package. You can load these classes individually using `StanfordCoreNLP.load_class` (see above). Once this is done, you can use them like you would from a Java program. Refer to the Java documentation for a list of functions provided by each of these classes.
+
+* PTBTokenizerAnnotator - tokenizes the text following Penn Treebank conventions.
+* WordToSentenceAnnotator - splits a sequence of words into a sequence of sentences.
+* POSTaggerAnnotator - annotates the text with part-of-speech tags.
+* MorphaAnnotator - morphological normalizer (generates lemmas).
+* NERAnnotator - annotates the text with named-entity labels.
+* NERCombinerAnnotator - combines several NER models.
+* TrueCaseAnnotator - detects the true case of words in free text.
+* ParserAnnotator - generates constituent and dependency trees.
+* NumberAnnotator - recognizes numerical entities such as numbers, money, times, and dates.
+* TimeWordAnnotator - recognizes common temporal expressions, such as "teatime".
+* QuantifiableEntityNormalizingAnnotator - normalizes the content of all numerical entities.
+* SRLAnnotator - annotates predicates and their semantic roles.
+* DeterministicCorefAnnotator - implements anaphora resolution using a deterministic model.
+* NFLAnnotator - implements entity and relation mention extraction for the NFL domain.
+
+**List of model files**
+
+Here is a full list of the default models for the Stanford Core NLP pipeline. You can change these models individually using `StanfordCoreNLP.set_model` (see above).
+
+* 'pos.model' - 'english-left3words-distsim.tagger'
+* 'ner.model.3class' - 'all.3class.distsim.crf.ser.gz'
+* 'ner.model.7class' - 'muc.7class.distsim.crf.ser.gz'
+* 'ner.model.MISCclass' -- 'conll.4class.distsim.crf.ser.gz'
+* 'parser.model' - 'englishPCFG.ser.gz'
+* 'dcoref.demonym' - 'demonyms.txt'
+* 'dcoref.animate' - 'animate.unigrams.txt'
+* 'dcoref.female' - 'female.unigrams.txt'
+* 'dcoref.inanimate' - 'inanimate.unigrams.txt'
+* 'dcoref.male' - 'male.unigrams.txt'
+* 'dcoref.neutral' - 'neutral.unigrams.txt'
+* 'dcoref.plural' - 'plural.unigrams.txt'
+* 'dcoref.singular' - 'singular.unigrams.txt'
+* 'dcoref.states' - 'state-abbreviations.txt'
+* 'dcoref.extra.gender' - 'namegender.combine.txt'
+
 **Contributing**
 
 Feel free to fork the project and send me a pull request!
