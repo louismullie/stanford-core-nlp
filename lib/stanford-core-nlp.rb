@@ -9,9 +9,10 @@ module StanfordCoreNLP
   # BindIt Configuration Options #
   # ############################ #
   
-  # The path in which to look for the Stanford JAR files,
-  # with a trailing slash.
-  self.jar_path = File.dirname(__FILE__) + '/../bin/'
+  # The default path for the JAR files 
+  # is the gem's bin folder.
+  self.jar_path = File.dirname(__FILE__).
+  gsub('/lib', '') + '/bin/'
   
   # Load the JVM with a minimum heap size of 512MB,
   # and a maximum heap size of 1024MB.
@@ -42,7 +43,11 @@ module StanfordCoreNLP
   
   # Default namespace is the Stanford pipeline namespace.
   self.default_namespace = 'edu.stanford.nlp.pipeline'
-
+  
+  # ########################### #
+  # Stanford Core NLP bindings  #
+  # ########################### #
+  
   require 'stanford-core-nlp/config'
   require 'stanford-core-nlp/bridge'
   
@@ -99,8 +104,15 @@ module StanfordCoreNLP
   # properties.
   def self.load(*annotators)
     
+    # Take care of Windows users.
+    if self.running_on_windows?
+      self.jar_path.gsub!('/', '\\')
+      self.model_path.gsub!('/', '\\')
+    end
+    
     # Make the bindings.
     self.bind
+    
     # Prepend the JAR path to the model files.
     properties = {}
     self.model_files.each do |k,v|
@@ -141,6 +153,11 @@ module StanfordCoreNLP
       list.add(StanfordCoreNLP::Word.new(t.to_s))
     end
     list
+  end
+
+  # Returns true if we're running on Windows.
+  def self.running_on_windows?
+    RUBY_PLATFORM.split("-")[1] == 'mswin32'
   end
 
 end
