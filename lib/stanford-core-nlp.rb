@@ -1,6 +1,6 @@
 module StanfordCoreNLP
 
-  VERSION = '0.3.0'
+  VERSION = '0.3.1'
 
   require 'bind-it'
   extend BindIt::Binding
