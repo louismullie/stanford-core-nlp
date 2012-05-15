@@ -1,6 +1,6 @@
 module StanfordCoreNLP
 
-  VERSION = '0.3.1'
+  VERSION = '0.3.2'
 
   require 'bind-it'
   extend BindIt::Binding
@@ -71,11 +71,11 @@ module StanfordCoreNLP
   # code (e.g. :english, :eng or :en will work).
   def self.use(language)
     lang = nil
-    self.language = language
     self.model_files = {}
     Config::LanguageCodes.each do |l,codes|
       lang = codes[2] if codes.include?(language)
     end
+    self.language = lang
     Config::Models.each do |n, languages|
       models = languages[lang]
       folder = Config::ModelFolders[n]
@@ -135,7 +135,9 @@ module StanfordCoreNLP
       properties[k] = f
     end
 
-    # Bug fix for French parser
+    # Bug fix for French parser due to Stanford bug
+    # Otherwise throws IllegalArgumentException: 
+    # Unknown option: -retainTmpSubcategories
     if self.language == :french
       properties['parser.flags'] = ''
     end
