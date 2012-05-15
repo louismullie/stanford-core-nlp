@@ -25,6 +25,7 @@ module StanfordCoreNLP
   self.default_jars = [
     'joda-time.jar', 
     'xom.jar', 
+    'stanford-parser.jar',
     'stanford-corenlp.jar', 
     'bridge.jar'
   ]
@@ -56,6 +57,8 @@ module StanfordCoreNLP
     attr_accessor :model_files
     # The folder in which to look for models.
     attr_accessor :model_path
+    # Store the language currently being used.
+    attr_accessor :language
   end
   
   # The path to the main folder containing the folders
@@ -68,6 +71,7 @@ module StanfordCoreNLP
   # code (e.g. :english, :eng or :en will work).
   def self.use(language)
     lang = nil
+    self.language = language
     self.model_files = {}
     Config::LanguageCodes.each do |l,codes|
       lang = codes[2] if codes.include?(language)
@@ -131,8 +135,14 @@ module StanfordCoreNLP
       properties[k] = f
     end
 
+    # Bug fix for French parser
+    if self.language == :french
+      properties['parser.flags'] = ''
+    end
+    
     properties['annotators'] =
     annotators.map { |x| x.to_s }.join(', ')
+    
     CoreNLP.new(get_properties(properties))
   end
 
@@ -144,7 +154,7 @@ module StanfordCoreNLP
     end
     props
   end
-
+  
   # Get a Java ArrayList binding to pass lists
   # of tokens to the Stanford Core NLP process.
   def self.get_list(tokens)
