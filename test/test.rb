@@ -3,8 +3,8 @@ require 'test/unit'
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 require 'stanford-core-nlp'
 
-StanfordCoreNLP.model_path = '/ruby/stanford/models/'
-StanfordCoreNLP.jar_path = '/ruby/stanford/bin/'
+#StanfordCoreNLP.model_path = '/ruby/stanford/models/'
+#StanfordCoreNLP.jar_path = '/ruby/stanford/bin/'
 
 module StanfordCoreNLP
   
