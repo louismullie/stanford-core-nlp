@@ -11,7 +11,7 @@ module StanfordCoreNLP
   class TestStanfordCoreNLP < Test::Unit::TestCase
 
     def test_load_class
-      
+      return
       StanfordCoreNLP.load_class('PTBTokenizerAnnotator')
       assert_equal true,
       StanfordCoreNLP::PTBTokenizerAnnotator.
@@ -22,7 +22,7 @@ module StanfordCoreNLP
     def test_all_french
       
       # Can't test both french and english at same time.
-      return
+      
       
       # Reset default values to make sure
       # that these features work.
@@ -45,7 +45,7 @@ module StanfordCoreNLP
     end
 
     def test_all_english
-      
+      return
       # Reset default values to make sure
       # that these features work.
       StanfordCoreNLP.use(:english)
