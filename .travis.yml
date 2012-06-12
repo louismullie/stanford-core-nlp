@@ -3,8 +3,7 @@ rvm:
   - 1.9.2
   - 1.9.3
 before_install:
-  - sudo apt-get install openjdk-6-jre
-  - export "JAVA_HOME=/usr/lib/jvm/java-6-sun/"
+  - ls /usr/lib/jvm/
 before_script: 
   - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
