@@ -94,7 +94,7 @@ module StanfordCoreNLP
   end
 
   # Use english by default.
-  self.use(:english)
+  self.use :english
 
   # Set a model file. 
   def self.set_model(name, file)
