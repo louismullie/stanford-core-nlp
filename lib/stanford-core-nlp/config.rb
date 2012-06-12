@@ -9,8 +9,7 @@ module StanfordCoreNLP
       :german => [:de, :ger, :german],
       :french => [:fr, :fre, :french],
       :arabic => [:ar, :ara, :arabic],
-      :chinese => [:ch, :chi, :chinese],
-      :xinhua => [:xi, :xin, :xinhua]
+      :chinese => [:ch, :chi, :chinese]
     }
 
     # Folders inside the JAR path for the models.
@@ -37,8 +36,7 @@ module StanfordCoreNLP
         :german => 'german-fast.tagger',
         :french  => 'french.tagger',
         :arabic => 'arabic-fast.tagger',
-        :chinese  => 'chinese.tagger',
-        :xinhua   => nil
+        :chinese  => 'chinese.tagger'
       },
       
       :parser => {
@@ -46,8 +44,7 @@ module StanfordCoreNLP
         :german => 'germanPCFG.ser.gz',
         :french  => 'frenchFactored.ser.gz',
         :arabic => 'arabicFactored.ser.gz',
-        :chinese  => 'chinesePCFG.ser.gz',
-        :xinhua   => 'xinhuaPCFG.ser.gz'
+        :chinese  => 'chinesePCFG.ser.gz'
       },
       
       :ner => {
@@ -59,8 +56,7 @@ module StanfordCoreNLP
         :german => {},
         :french  => {},
         :arabic => {},
-        :chinese  => {},
-        :xinhua   => {}
+        :chinese  => {}
       },
       
       :dcoref => {
@@ -74,15 +70,14 @@ module StanfordCoreNLP
           'plural' => 'plural.unigrams.txt',
           'singular' => 'singular.unigrams.txt',
           'states' => 'state-abbreviations.txt',
-          'countries' => 'unknown.txt',          # Fix - can somebody provide this file?
-          'states.provinces' => 'unknown.txt',   # Fix - can somebody provide this file?
+          'countries' => 'countries', 
+          'states.provinces' => 'statesandprovinces',
           'extra.gender' => 'namegender.combine.txt'
         },
         :german => {},
         :french  => {},
         :arabic => {},
-        :chinese  => {},
-        :xinhua   => {}
+        :chinese  => {}
       }
       
       # Models to add.
