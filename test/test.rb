@@ -47,7 +47,7 @@ module StanfordCoreNLP
     def test_all_english
       
       # Can't test both french and english at same time.
-      return 
+      return
       
       # Reset default values to make sure
       # that these features work.
