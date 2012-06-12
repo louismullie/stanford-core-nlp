@@ -8,6 +8,8 @@ If you are looking for an full-scale natural language processing framework in Ru
 
 **Installing**
 
+_Note: This gem uses the Ruby-Java Bridge (Rjb), which currently does not support Java 7. Therefore, if you have installed Java 7, you should set your JAVA_HOME to point to your old Java 6 install before installing Rjb; for example, `export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk/"`._
+
 First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Three different packages are available:
 
 * A [minimal package for English](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with one tagger model  and one parser model for English.
