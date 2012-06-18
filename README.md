@@ -1,5 +1,3 @@
-[![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
-
 **About**
   
 This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools for tokenization, part-of-speech tagging, lemmatization, and parsing of several languages, as well as named entity recognition and coreference resolution in English. This gem is compatible with Ruby 1.9.2 and above.
