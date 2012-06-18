@@ -12,7 +12,7 @@ module StanfordCoreNLP
   # The default path for the JAR files 
   # is the gem's bin folder.
   self.jar_path = File.dirname(__FILE__).
-  gsub('/lib', '') + '/bin/'
+  gsub(/\/lib\z/, '') + '/bin/'
   
   # Load the JVM with a minimum heap size of 512MB,
   # and a maximum heap size of 1024MB.
