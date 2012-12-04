@@ -135,10 +135,11 @@ module StanfordCoreNLP
       properties[k] = f
     end
 
-    # Bug fix for French parser due to Stanford bug
+    # Bug fix for French/German parser due to Stanford bug.
     # Otherwise throws IllegalArgumentException: 
     # Unknown option: -retainTmpSubcategories
-    if self.language == :french
+    if self.language == :french ||
+       self.language == :german
       properties['parser.flags'] = ''
     end
     
