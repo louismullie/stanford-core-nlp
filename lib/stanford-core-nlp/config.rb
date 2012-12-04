@@ -23,9 +23,9 @@ module StanfordCoreNLP
     # Tag sets used by Stanford for each language.
     TagSets = {
       :english => :penn,
-      :german => :negra,
-      :chinese => :penn_chinese,
-      :french => :simple
+      :german => :stutgart,
+      :chinese => :chinese,
+      :french => :paris7
     }
     
     # Default models for all languages.
