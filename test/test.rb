@@ -14,8 +14,7 @@ module StanfordCoreNLP
       return
       StanfordCoreNLP.load_class('PTBTokenizerAnnotator')
       assert_equal true,
-      StanfordCoreNLP::PTBTokenizerAnnotator.
-      respond_to?(:java_methods)
+      StanfordCoreNLP::PTBTokenizerAnnotator.respond_to?(:java_methods)
       
     end
     
@@ -34,8 +33,7 @@ module StanfordCoreNLP
       
       sentences, tokens, tags, lemmas, begin_char, last_char = *get_information(text)
       
-      assert_equal ["Bonjour, je suis bel et bien arrivé au château.", 
-                    "Le roi m'a donné un biscuit."], sentences
+      assert_equal ["Bonjour, je suis bel et bien arrivé au château.", "Le roi m'a donné un biscuit."], sentences
       assert_equal %w[Bonjour , je suis bel et bien arrivé au château . Le roi m ' a donné un biscuit .], tokens
       assert_equal %w[I , CL V ADV C ADV V P N . D N N N V V D N .], tags
       assert_equal %w[bonjour , je sui bel et bien arrivé au château . le roi m ' a donné un biscuit .], lemmas
@@ -52,8 +50,7 @@ module StanfordCoreNLP
       StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
       StanfordCoreNLP.set_model('parser.model', 'englishPCFG.ser.gz')
 
-      text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
-      'Berlin to discuss a new austerity package.'
+      text = 'Angela Merkel met Nicolas Sarkozy on January 25th in Berlin to discuss a new austerity package.'
 
       pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse)
       text = StanfordCoreNLP::Text.new(text)
@@ -61,12 +58,9 @@ module StanfordCoreNLP
 
       sentences, tokens, tags, lemmas, begin_char, last_char = *get_information(text)
       
-      assert_equal ['Angela Merkel met Nicolas Sarkozy on January 25th ' +
-      'in Berlin to discuss a new austerity package.'], sentences
-      assert_equal %w[Angela Merkel met Nicolas Sarkozy on
-      January 25th in Berlin to discuss a new austerity package .], tokens
-      assert_equal %w[Angela Merkel meet Nicolas Sarkozy on
-      January 25th in Berlin to discuss a new austerity package .], lemmas
+      assert_equal ['Angela Merkel met Nicolas Sarkozy on January 25th in Berlin to discuss a new austerity package.'], sentences
+      assert_equal %w[Angela Merkel met Nicolas Sarkozy on January 25th in Berlin to discuss a new austerity package .], tokens
+      assert_equal %w[Angela Merkel meet Nicolas Sarkozy on January 25th in Berlin to discuss a new austerity package .], lemmas
       assert_equal %w[NNP NNP VBD NNP NNP IN NNP JJ IN NNP TO VB DT JJ NN NN .], tags
       assert_equal [0, 7, 14, 18, 26, 34, 37, 45, 50, 53, 60, 63, 71, 73, 77, 87, 94], begin_char
       assert_equal [6, 13, 17, 25, 33, 36, 44, 49, 52, 59, 62, 70, 72, 76, 86, 94, 95], last_char
@@ -84,7 +78,6 @@ module StanfordCoreNLP
       last_char = []
 
       text.get(:sentences).each do |sentence|
-
         sentences << sentence.to_s
         sentence.get(:tokens).each do |token|
           tokens << token.get(:value).to_s

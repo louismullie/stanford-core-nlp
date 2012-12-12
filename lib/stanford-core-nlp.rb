@@ -1,57 +1,38 @@
+require 'stanford-core-nlp/config'
+
 module StanfordCoreNLP
 
   VERSION = '0.3.5'
 
-  require 'bind-it'
-  extend BindIt::Binding
-  
+  if RUBY_PLATFORM =~ /java/
+    require 'stanford-core-nlp/bind_it_stub'
+    extend BindItStub
+
+    require 'stanford-core-nlp/jruby_binding'
+    extend JrubyBinding
+  else
+    require 'bind-it'
+    extend BindIt::Binding
+
+    require 'stanford-core-nlp/mri_binding'
+    extend MriBinding
+  end
+
   # ############################ #
   # BindIt Configuration Options #
   # ############################ #
   
   # The default path for the JAR files 
   # is the gem's bin folder.
-  self.jar_path = File.dirname(__FILE__).
-  gsub(/\/lib\z/, '') + '/bin/'
-  
-  # Load the JVM with a minimum heap size of 512MB,
-  # and a maximum heap size of 1024MB.
-  self.jvm_args = ['-Xms512M', '-Xmx1024M']
-  
-  # Turn logging off by default.
-  self.log_file = nil
-  
-  # Default JAR files to load.
-  self.default_jars = [
-    'joda-time.jar', 
-    'xom.jar', 
-    'stanford-parser.jar',
-    'stanford-corenlp.jar', 
-    'bridge.jar'
-  ]
-  
-  # Default classes to load.
-  self.default_classes = [
-    ['StanfordCoreNLP', 'edu.stanford.nlp.pipeline', 'CoreNLP'],
-    ['Annotation', 'edu.stanford.nlp.pipeline', 'Text'],
-    ['Word', 'edu.stanford.nlp.ling'],
-    ['MaxentTagger', 'edu.stanford.nlp.tagger.maxent'],
-    ['CRFClassifier', 'edu.stanford.nlp.ie.crf'],
-    ['Properties', 'java.util'],
-    ['ArrayList', 'java.util'],
-    ['AnnotationBridge', '']
-  ]
-  
+  self.jar_path = File.dirname(__FILE__).gsub(/\/lib\z/, '') + '/deps/'
+    
   # Default namespace is the Stanford pipeline namespace.
   self.default_namespace = 'edu.stanford.nlp.pipeline'
   
   # ########################### #
   # Stanford Core NLP bindings  #
   # ########################### #
-  
-  require 'stanford-core-nlp/config'
-  require 'stanford-core-nlp/bridge'
-  
+    
   class << self
     # The model file names for a given language.
     attr_accessor :model_files
@@ -83,12 +64,10 @@ module StanfordCoreNLP
         n = n.to_s
         n += '.model' if n == 'ner'
         models.each do |m, file|
-          self.model_files["#{n}.#{m}"] =
-          folder + file
+          self.model_files["#{n}.#{m}"] = folder + file
         end
       elsif models.is_a?(String)
-        self.model_files["#{n}.model"] =
-        folder + models
+        self.model_files["#{n}.model"] = folder + models
       end
     end
   end
@@ -99,54 +78,7 @@ module StanfordCoreNLP
   # Set a model file. 
   def self.set_model(name, file)
     n = name.split('.')[0].intern
-    self.model_files[name] =
-    Config::ModelFolders[n] + file
-  end
-
-  # Load a StanfordCoreNLP pipeline with the
-  # specified JVM flags and StanfordCoreNLP
-  # properties.
-  def self.load(*annotators)
-    
-    # Take care of Windows users.
-    if self.running_on_windows?
-      self.jar_path.gsub!('/', '\\')
-      self.model_path.gsub!('/', '\\')
-    end
-    
-    # Make the bindings.
-    self.bind
-    
-    # Prepend the JAR path to the model files.
-    properties = {}
-    self.model_files.each do |k,v|
-      found = false
-      annotators.each do |annotator|
-        found = true if k.index(annotator.to_s)
-        break if found
-      end
-      next unless found
-      f = self.model_path + v
-      unless File.readable?(f)
-        raise "Model file #{f} could not be found. " +
-        "You may need to download this file manually "+
-        " and/or set paths properly."
-      end
-      properties[k] = f
-    end
-
-    # Bug fix for French/German parser due to Stanford bug.
-    # Otherwise throws IllegalArgumentException: 
-    # Unknown option: -retainTmpSubcategories
-    if self.language == :french ||
-       self.language == :german
-      properties['parser.flags'] = ''
-    end
-    
-    properties['annotators'] =
-    annotators.map { |x| x.to_s }.join(', ')
-    
-    CoreNLP.new(get_properties(properties))
+    self.model_files[name] = Config::ModelFolders[n] + file
   end
 
   # Create a java.util.Properties object from a hash.

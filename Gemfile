@@ -1,3 +1,7 @@
 source :rubygems
+
 gem "rake"
-gem "bind-it"
+
+platform :mri  do
+  gem "bind-it"
+end
