@@ -4,19 +4,8 @@ module StanfordCoreNLP
 
   VERSION = '0.3.5'
 
-  if RUBY_PLATFORM =~ /java/
-    require 'stanford-core-nlp/bind_it_stub'
-    extend BindItStub
-
-    require 'stanford-core-nlp/jruby_binding'
-    extend JrubyBinding
-  else
-    require 'bind-it'
-    extend BindIt::Binding
-
-    require 'stanford-core-nlp/mri_binding'
-    extend MriBinding
-  end
+  require 'bind-it'
+  extend BindIt::Binding
 
   # ############################ #
   # BindIt Configuration Options #
