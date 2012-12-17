@@ -1,4 +1,4 @@
-module StanfordCoreNLP
+module StanfordCoreNLP::RjbBridge
 
   # Modify the Rjb JavaProxy class to add our 
   # own methods to every Java object.
