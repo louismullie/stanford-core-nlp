@@ -1,20 +1,14 @@
-#encoding: utf-8
 require 'rspec'
 
 require_relative '../lib/stanford-core-nlp'
 
-StanfordCoreNLP.model_path = '/ruby/stanford-core-nlp-all/'
-StanfordCoreNLP.jar_path = '/ruby/stanford-core-nlp-all/'
+StanfordCoreNLP.model_path = '/ruby/stanford-core-nlp-all/' # Local testing only
+StanfordCoreNLP.jar_path = '/ruby/stanford-core-nlp-all/'   # Local testing only.
 
 def get_information(text)
 
-  sentences = []
-
-  tokens = []
-  tags = []
-  lemmas = []
-  begin_char = []
-  last_char = []
+  sentences, tokens, tags, = [], [], []
+  lemmas, begin_char, last_char = [], [], []
 
   text.get(:sentences).each do |sentence|
     sentences << sentence.to_s

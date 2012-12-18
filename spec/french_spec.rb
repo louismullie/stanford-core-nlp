@@ -1,9 +1,11 @@
 #encoding: utf-8
+require_relative 'spec_helper'
 
 describe StanfordCoreNLP do
   
   context "when the whole pipeline is run on a French text" do
-    it "should get the sentences, tokens, POS tags, lemmas and syntactic tree" do
+    
+    it "should get correct the sentences, tokens, POS tags, lemmas and syntactic tree" do
    
       StanfordCoreNLP.use(:french)
       pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse)
@@ -21,6 +23,7 @@ describe StanfordCoreNLP do
       last_char.should eql [7, 8, 11, 16, 20, 23, 28, 35, 38, 46, 47, 50, 54, 56, 57, 58, 64, 67, 75, 76]
     
     end
+    
   end
 
 end
