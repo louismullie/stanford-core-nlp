@@ -1,18 +1,17 @@
 **About**
   
-This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools for tokenization, part-of-speech tagging, lemmatization, and parsing of several languages, as well as named entity recognition and coreference resolution in English. This gem is compatible with Ruby 1.9.2 and above.
+This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools for tokenization, sentence segmentation, part-of-speech tagging, lemmatization, and parsing of English, French and German. The package also provides named entity recognition and coreference resolution for English. This gem is compatible with JRuby 1.6.4 and above, as well as Ruby 1.9.2 and 1.9.3 (through Rjb).
 
-If you are looking for an full-scale natural language processing framework in Ruby, have a look at [Treat](https://github.com/louismullie/treat).
+This gem only provides a thin wrapper over the Stanford Core NLP API. If you are looking for a Ruby natural language processing framework, have a look at [Treat](https://github.com/louismullie/treat).
 
 **Installing**
 
-_Note: This gem uses the Ruby-Java Bridge (Rjb), which currently does not support Java 7. Therefore, if you have installed Java 7, you should set your JAVA_HOME to point to your old Java 6 install before installing Rjb; for example, `export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk/"`._
+_Note: If you are running on MRI, this gem will use the Ruby-Java Bridge (Rjb), which currently does not support Java 7. Therefore, if you have installed Java 7, you should set your JAVA_HOME to point to your old Java 6 install before installing Rjb; for example, `export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk/"`._
 
 First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Three different packages are available:
 
-* A [minimal package for English](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with one tagger model  and one parser model for English.
-* A [full package for English](http://louismullie.com/treat/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
-* A [full package for all languages](http://louismullie.com/treat/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German.
+* A [minimal package](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with the default tagger and parser models for English, French and German.
+* A [full package](http://louismullie.com/treat/stanford-core-nlp-all.zip), with all of the tagger and parser models for English, French and German, as well as named entity and coreference resolution models for English.
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
 
@@ -38,7 +37,7 @@ StanfordCoreNLP.jvm_args = ['-option1', '-option2']
 StanfordCoreNLP.log_file = 'log.txt'
 
 # Use the model files for a different language than English.
-StanfordCoreNLP.use(:french)
+StanfordCoreNLP.use(:french) # or :german
 
 # Change a specific model file.
 StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
@@ -71,7 +70,7 @@ text.get(:sentences).each do |sentence|
     # Named entity tag
     puts token.get(:named_entity_tag).to_s
     # Coreference
-   puts token.get(:coref_cluster_id).to_s
+    puts token.get(:coref_cluster_id).to_s
     # Also of interest: coref, coref_chain, coref_cluster, coref_dest, coref_graph.
   end
 end
@@ -135,8 +134,6 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.singular' - 'singular.unigrams.txt'
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
-
-__**Important: the name of the parser model file option recently changed from `parser.model` to `parse.model`**__
 
 **Contributing**
 
