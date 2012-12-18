@@ -6,7 +6,7 @@ rvm:
 before_install:
   - export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk-common/"
   - export "JRUBY_OPTS=--1.9"
-  - ls /usr/lib/jvm/
+  - gem install bind-it
 before_script: 
   - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
