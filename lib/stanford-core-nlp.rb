@@ -51,6 +51,9 @@ module StanfordCoreNLP
   # Stanford Core NLP bindings  #
   # ########################### #
 
+  require 'stanford-core-nlp/bridge'
+  extend StanfordCoreNLP::Bridge
+  
   class << self
     # The model file names for a given language.
     attr_accessor :model_files
@@ -64,18 +67,6 @@ module StanfordCoreNLP
   # with the individual models inside. By default, this
   # is the same as the JAR path.
   self.model_path = self.jar_path
-
-  # ########################### #
-  # Annotation bridge (Rjb/Jrb) #
-  # ########################### #
-  
-  if RUBY_PLATFORM =~ /java/
-    require 'stanford-core-nlp/jruby_bridge'
-    extend StanfordCoreNLP::JrubyBridge
-  else
-    require 'stanford-core-nlp/rjb_bridge'
-    extend StanfordCoreNLP::RjbBridge
-  end
   
   # ########################### #
   # Public configuration params #
