@@ -12,7 +12,7 @@ First, install the gem: `gem install stanford-core-nlp`. Then, download the Stan
 
 * A [minimal package for English](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with one tagger model  and one parser model for English.
 * A [full package for English](http://louismullie.com/treat/stanford-core-nlp-english.zip), with all tagger and parser models for English, plus the coreference resolution and named entity recognition models.
-* A [full package for all languages](http://louismullie.com/treat/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German, Arabic and Chinese.
+* A [full package for all languages](http://louismullie.com/treat/stanford-core-nlp-all.zip), including tagger and parser models for English, French, German.
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
 
