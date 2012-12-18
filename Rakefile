@@ -21,6 +21,7 @@ task :spec, [:language] do |t, args|
       s = `rspec spec/#{language}_spec.rb`
       code = 1 unless s.index('0 failures')
     end
+    puts "The spec failed." if code == 1
     exit code
   end
   
