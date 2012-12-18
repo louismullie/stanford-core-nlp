@@ -7,15 +7,13 @@ module StanfordCoreNLP
     LanguageCodes = {
       :english => [:en, :eng, :english],
       :german => [:de, :ger, :german],
-      :french => [:fr, :fre, :french],
-      :arabic => [:ar, :ara, :arabic],
-      :chinese => [:ch, :chi, :chinese]
+      :french => [:fr, :fre, :french]
     }
 
     # Folders inside the JAR path for the models.
     ModelFolders = {
       :pos => 'taggers/',
-      :parser => 'grammar/',
+      :parse => 'grammar/',
       :ner => 'classifiers/',
       :dcoref => 'dcoref/'
     }
@@ -24,7 +22,6 @@ module StanfordCoreNLP
     TagSets = {
       :english => :penn,
       :german => :stutgart,
-      :chinese => :chinese,
       :french => :paris7
     }
     
@@ -34,17 +31,13 @@ module StanfordCoreNLP
       :pos => {
         :english => 'english-left3words-distsim.tagger',
         :german => 'german-fast.tagger',
-        :french  => 'french.tagger',
-        :arabic => 'arabic-fast.tagger',
-        :chinese  => 'chinese.tagger'
+        :french  => 'french.tagger'
       },
       
-      :parser => {
+      :parse => {
         :english => 'englishPCFG.ser.gz',
         :german => 'germanPCFG.ser.gz',
-        :french  => 'frenchFactored.ser.gz',
-        :arabic => 'arabicFactored.ser.gz',
-        :chinese  => 'chinesePCFG.ser.gz'
+        :french  => 'frenchFactored.ser.gz'
       },
       
       :ner => {
@@ -54,9 +47,7 @@ module StanfordCoreNLP
           'MISCclass' => 'conll.4class.distsim.crf.ser.gz'
         },
         :german => {},
-        :french  => {},
-        :arabic => {},
-        :chinese  => {}
+        :french  => {}
       },
       
       :dcoref => {
@@ -75,9 +66,7 @@ module StanfordCoreNLP
           'extra.gender' => 'namegender.combine.txt'
         },
         :german => {},
-        :french  => {},
-        :arabic => {},
-        :chinese  => {}
+        :french  => {}
       }
       
       # Models to add.
@@ -91,61 +80,6 @@ module StanfordCoreNLP
 
     # List of annotations by JAVA class path.
     Annotations = {
-
-      'nlp.trees.international.pennchinese.ChineseGrammaticalRelations' => [
-        'AdjectivalModifierGRAnnotation',
-        'AdverbialModifierGRAnnotation',
-        'ArgumentGRAnnotation',
-        'AspectMarkerGRAnnotation',
-        'AssociativeMarkerGRAnnotation',
-        'AssociativeModifierGRAnnotation',
-        'AttributiveGRAnnotation',
-        'AuxModifierGRAnnotation',
-        'AuxPassiveGRAnnotation',
-        'BaGRAnnotation',
-        'ClausalComplementGRAnnotation',
-        'ClausalSubjectGRAnnotation',
-        'ClauseModifierGRAnnotation',
-        'ComplementGRAnnotation',
-        'ComplementizerGRAnnotation',
-        'ControllingSubjectGRAnnotation',
-        'CoordinationGRAnnotation',
-        'DeterminerGRAnnotation',
-        'DirectObjectGRAnnotation',
-        'DvpMarkerGRAnnotation',
-        'DvpModifierGRAnnotation',
-        'EtcGRAnnotation',
-        'LocalizerComplementGRAnnotation',
-        'ModalGRAnnotation',
-        'ModifierGRAnnotation',
-        'NegationModifierGRAnnotation',
-        'NominalPassiveSubjectGRAnnotation',
-        'NominalSubjectGRAnnotation',
-        'NounCompoundModifierGRAnnotation',
-        'NumberModifierGRAnnotation',
-        'NumericModifierGRAnnotation',
-        'ObjectGRAnnotation',
-        'OrdNumberGRAnnotation',
-        'ParentheticalGRAnnotation',
-        'ParticipialModifierGRAnnotation',
-        'PreconjunctGRAnnotation',
-        'PrepositionalLocalizerModifierGRAnnotation',
-        'PrepositionalModifierGRAnnotation',
-        'PrepositionalObjectGRAnnotation',
-        'PunctuationGRAnnotation',
-        'RangeGRAnnotation',
-        'RelativeClauseModifierGRAnnotation',
-        'ResultativeComplementGRAnnotation',
-        'SemanticDependentGRAnnotation',
-        'SubjectGRAnnotation',
-        'TemporalClauseGRAnnotation',
-        'TemporalGRAnnotation',
-        'TimePostpositionGRAnnotation',
-        'TopicGRAnnotation',
-        'VerbCompoundGRAnnotation',
-        'VerbModifierGRAnnotation',
-        'XClausalComplementGRAnnotation'
-      ],
 
       'nlp.dcoref.CoNLL2011DocumentReader' => [
         'CorefMentionAnnotation',
