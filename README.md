@@ -52,7 +52,7 @@ text = 'Angela Merkel met Nicolas Sarkozy on January 25th in ' +
    'looked pleased, but Merkel was dismayed.'
 
 pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
-text = StanfordCoreNLP::Text.new(text)
+text = StanfordCoreNLP::Annotation.new(text)
 pipeline.annotate(text)
 
 text.get(:sentences).each do |sentence|
@@ -77,7 +77,7 @@ text.get(:sentences).each do |sentence|
 end
 ```
 
-> Important: You need to load the StanfordCoreNLP pipeline before using the StanfordCoreNLP::Text class.
+> Important: You need to load the StanfordCoreNLP pipeline before using the StanfordCoreNLP::Annotation class.
 
 A good reference for names of annotations are the Stanford Javadocs for [CoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ling/CoreAnnotations.html), [CoreCorefAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/dcoref/CorefCoreAnnotations.html), and [TreeCoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/trees/TreeCoreAnnotations.html). For a full list of all possible annotations, see the 'config.rb' file inside the gem. The Ruby symbol (e.g. `:named_entity_tag`) corresponding to a Java annotation class follows the simple un-camel-casing convention, with 'Annotation' at the end removed. For example, the annotation `NamedEntityTagAnnotation` translates to `:named_entity_tag`, `PartOfSpeechAnnotation` to `:part_of_speech`, etc.
 
@@ -124,7 +124,7 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'ner.model.3class' - 'all.3class.distsim.crf.ser.gz'
 * 'ner.model.7class' - 'muc.7class.distsim.crf.ser.gz'
 * 'ner.model.MISCclass' -- 'conll.4class.distsim.crf.ser.gz'
-* 'parser.model' - 'englishPCFG.ser.gz'
+* 'parse.model' - 'englishPCFG.ser.gz'
 * 'dcoref.demonym' - 'demonyms.txt'
 * 'dcoref.animate' - 'animate.unigrams.txt'
 * 'dcoref.female' - 'female.unigrams.txt'
@@ -135,6 +135,8 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.singular' - 'singular.unigrams.txt'
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
+
+__**Important: the name of the parser model file option recently changed from `parser.model` to `parse.model`**__
 
 **Contributing**
 
