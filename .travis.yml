@@ -6,8 +6,9 @@ rvm:
 before_install:
   - export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk/"
   - export "JRUBY_OPTS=--1.9"
-  - gem install bundler
+  - ls /usr/lib/jvm/
 before_script: 
   - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
-script: rake spec
+script:
+  - rake spec
