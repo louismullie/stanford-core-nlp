@@ -1,10 +1,8 @@
 module StanfordCoreNLP::JrubyBridge
-  
-  #### FIX - must list clazzes
-  
-    return unless clazz.method_defined?(:get)
 
-    clazz.class_eval do
+  def inject_get_method(klass)
+    return unless klass.method_defined?(:get)
+    klass.class_eval do
 
       # Dynamically defined on all proxied annotation classes.
       # Get an annotation using the annotation bridge.
@@ -12,7 +10,7 @@ module StanfordCoreNLP::JrubyBridge
         anno_class = "#{StanfordCoreNLP.camel_case(annotation)}Annotation"
         if anno_base
           unless StanfordNLP::Config::Annotations[anno_base]
-            raise "The path #{anno_base} doesn't exist." 
+            raise "The path #{anno_base} doesn't exist."
           end
           anno_bases = [anno_base]
         else
@@ -26,7 +24,7 @@ module StanfordCoreNLP::JrubyBridge
         else
           base_class = anno_bases[0]
         end
-    
+
         fqcn = "edu.stanford.#{base_class}"
         class_path = fqcn.split(".")
         class_name = class_path.pop
@@ -38,7 +36,6 @@ module StanfordCoreNLP::JrubyBridge
       alias_method :get_without_casting, :get
       alias_method :get, :get_with_casting
     end
-  
   end
-  
+
 end
