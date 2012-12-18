@@ -9,3 +9,4 @@ before_install:
 before_script: 
   - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
+script: rake spec
