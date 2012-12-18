@@ -4,13 +4,9 @@ rvm:
   - 1.9.3
   - jruby-19mode
 before_install:
-<<<<<<< HEAD
-  - export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk-common/"
+  - export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk-common"
   - export "JRUBY_OPTS=--1.9"
   - gem install bind-it
-=======
-  - export "JAVA_HOME=/usr/lib/jvm/java-6-openjdk"
->>>>>>> Fix trailing slash.
 before_script: 
   - sudo wget http://www.louismullie.com/treat/stanford-core-nlp-minimal.zip
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
