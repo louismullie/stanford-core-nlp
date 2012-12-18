@@ -1,10 +1,10 @@
-require 'rspec/core/rake_task'
-
 # Note that we need to run each language
 # spec in a separate rake task. This is 
 # because the language for the Stanford 
 # Core NLP pipeline can only be set once.
 task :spec, [:language] do |t, args|
+  
+  require 'rspec'
   
   languages = ['english', 'german', 'french']
   language = args.language
