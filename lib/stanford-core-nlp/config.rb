@@ -21,7 +21,7 @@ module StanfordCoreNLP
     # Tag sets used by Stanford for each language.
     TagSets = {
       :english => :penn,
-      :german => :stutgart
+      :german => :stutgart,
       :french => :paris7
     }
     
