@@ -41,13 +41,8 @@ module StanfordCoreNLP
       },
       
       :ner => {
-        :english => {
-          '3class' => 'all.3class.distsim.crf.ser.gz',
-          '7class' => 'muc.7class.distsim.crf.ser.gz',
-          'MISCclass' => 'conll.4class.distsim.crf.ser.gz'
-        },
-        :german => {},
-        :french  => {}
+        :english => 'all.3class.distsim.crf.ser.gz'
+        # :german => {} # Add this at some point.
       },
       
       :dcoref => {

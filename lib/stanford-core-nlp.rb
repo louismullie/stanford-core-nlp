@@ -87,7 +87,6 @@ module StanfordCoreNLP
       folder = Config::ModelFolders[n]
       if models.is_a?(Hash)
         n = n.to_s
-        n += '.model' if n == 'ner'
         models.each do |m, file|
           self.model_files["#{n}.#{m}"] = folder + file
         end
