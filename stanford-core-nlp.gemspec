@@ -18,6 +18,8 @@ recognition and coreference resolution for English. }
   s.files = Dir['lib/**/*'] + Dir['bin/**/*'] + ['README.md', 'LICENSE']
   
   # Runtime dependencies
-  s.add_runtime_dependency 'bind-it'
-    
+  s.add_runtime_dependency 'bind-it', '~>0.2.2'
+
+  # Development dependency.
+  s.add_development_dependency 'rspec'
 end
