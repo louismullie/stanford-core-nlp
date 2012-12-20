@@ -159,6 +159,18 @@ module StanfordCoreNLP
       # Otherswise throws java.lang.NullPointerException: null.
       properties['parse.buildgraphs'] = 'false'
     end
+    
+    # Bug fix for NER system. Otherwise throws:
+    # Error initializing binder 1 at edu.stanford.
+    # nlp.time.Options.<init>(Options.java:88)
+    properties['sutime.binders'] = '0'
+    
+    # Manually include SUTime models.
+    if annotators.include?(:ner)
+      properties['sutime.rules'] = 
+      self.jar_path + 'sutime/defs.sutime.txt, ' +
+      self.jar_path + 'sutime/english.sutime.txt'
+    end
 
     # Hack for Rjb compatibility.
     const_get(:CoreNLP).new(get_properties(properties))
