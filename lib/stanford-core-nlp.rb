@@ -13,7 +13,7 @@ module StanfordCoreNLP
 
   # The default path for the JAR files
   # is the gem's bin folder.
-  self.jar_path = File.dirname(__FILE__).gsub(/\/lib\z/, '') + '/bins/'
+  self.jar_path = File.dirname(__FILE__).gsub(/\/lib\z/, '') + '/bin/'
 
   # Default namespace is the Stanford pipeline namespace.
   self.default_namespace = 'edu.stanford.nlp.pipeline'
