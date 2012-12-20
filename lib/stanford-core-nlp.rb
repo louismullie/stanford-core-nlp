@@ -32,6 +32,7 @@ module StanfordCoreNLP
     'stanford-parser.jar',
     'stanford-corenlp.jar',
     'stanford-segmenter.jar',
+    'jollyday.jar',
     'bridge.jar'
   ]
 
