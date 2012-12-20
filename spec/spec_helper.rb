@@ -2,8 +2,8 @@ require 'rspec'
 
 require_relative '../lib/stanford-core-nlp'
 
-StanfordCoreNLP.model_path = '/ruby/stanford-core-nlp-minimal/' # Local testing only
-StanfordCoreNLP.jar_path = '/ruby/stanford-core-nlp-minimal/'   # Local testing only.
+# StanfordCoreNLP.model_path = '/ruby/stanford-core-nlp-minimal/' # Local testing only
+# StanfordCoreNLP.jar_path = '/ruby/stanford-core-nlp-minimal/'   # Local testing only.
 
 def get_information(text, with_name_tag=false, with_coref=false)
 
