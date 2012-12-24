@@ -6,6 +6,10 @@ This gem provides high-level Ruby bindings to the [Stanford Core NLP package](ht
 
 This gem only provides a thin wrapper over the Stanford Core NLP API. If you are looking for a natural language processing framework for Ruby, have a look at [Treat](https://github.com/louismullie/treat).
 
+**Compatibility**
+
+This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
+
 **Installing**
 
 First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Three different packages are available:
