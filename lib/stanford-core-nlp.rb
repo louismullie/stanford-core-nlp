@@ -45,7 +45,8 @@ module StanfordCoreNLP
     ['MaxentTagger', 'edu.stanford.nlp.tagger.maxent'],
     ['CRFClassifier', 'edu.stanford.nlp.ie.crf'],
     ['Properties', 'java.util'],
-    ['ArrayList', 'java.util']
+    ['ArrayList', 'java.util'],
+    ['AnnotationBridge', '']
   ]
 
   # ########################### #
@@ -168,12 +169,15 @@ module StanfordCoreNLP
     # Manually include SUTime models.
     if annotators.include?(:ner)
       properties['sutime.rules'] = 
-      self.jar_path + 'sutime/defs.sutime.txt, ' +
-      self.jar_path + 'sutime/english.sutime.txt'
+      self.model_path + 'sutime/defs.sutime.txt, ' +
+      self.model_path + 'sutime/english.sutime.txt'
     end
-
-    # Hack for Rjb compatibility.
-    const_get(:CoreNLP).new(get_properties(properties))
+    
+    props = get_properties(properties)
+    
+    # Hack for Java7 compatibility.
+    bridge = const_get(:AnnotationBridge)
+    bridge.getPipelineWithProperties(props)
 
   end
   
