@@ -13,6 +13,7 @@ before_script:
 script:
   - rake spec
   - gem uninstall bind-it
+  - gem uninstall rjb
   - export "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386"
   - gem install bind-it
   - rake spec
