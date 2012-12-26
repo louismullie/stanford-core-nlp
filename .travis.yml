@@ -12,3 +12,7 @@ before_script:
   - sudo unzip -o stanford-core-nlp-minimal.zip -d bin/
 script:
   - rake spec
+  - gem uninstall bind-it
+  - export "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386"
+  - gem install bind-it
+  - rake spec
