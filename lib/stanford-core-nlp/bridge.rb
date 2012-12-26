@@ -1,9 +1,5 @@
 module StanfordCoreNLP::Bridge
 
-  unless RUBY_PLATFORM =~ /java/
-    StanfordCoreNLP.default_classes <<  ['AnnotationBridge', '']
-  end
-  
   def inject_get_method(klass)
     
     klass.class_eval do
