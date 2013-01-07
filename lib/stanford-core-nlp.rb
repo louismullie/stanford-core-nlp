@@ -44,6 +44,8 @@ module StanfordCoreNLP
     ['CoreLabel', 'edu.stanford.nlp.ling'],
     ['MaxentTagger', 'edu.stanford.nlp.tagger.maxent'],
     ['CRFClassifier', 'edu.stanford.nlp.ie.crf'],
+    ['LexicalizedParser', 'edu.stanford.nlp.parser.lexparser'],
+    ['Options', 'edu.stanford.nlp.parser.lexparser'],
     ['Properties', 'java.util'],
     ['ArrayList', 'java.util'],
     ['AnnotationBridge', '']
@@ -111,11 +113,8 @@ module StanfordCoreNLP
   #    Public API methods       #
   # ########################### #
 
-  # Load a StanfordCoreNLP pipeline with the
-  # specified JVM flags and StanfordCoreNLP
-  # properties.
-  def self.load(*annotators)
-
+  def self.bind
+    
     # Take care of Windows users.
     if self.running_on_windows?
       self.jar_path.gsub!('/', '\\')
@@ -123,14 +122,23 @@ module StanfordCoreNLP
     end
 
     # Make the bindings.
-    self.bind
+    super
 
     # Bind annotation bridge.
     self.default_classes.each do |info|
       klass = const_get(info.first)
       self.inject_get_method(klass)
     end
-
+  
+  end
+  
+  # Load a StanfordCoreNLP pipeline with the
+  # specified JVM flags and StanfordCoreNLP
+  # properties.
+  def self.load(*annotators)
+    
+    self.bind unless self.bound
+    
     # Prepend the JAR path to the model files.
     properties = {}
     self.model_files.each do |k,v|
