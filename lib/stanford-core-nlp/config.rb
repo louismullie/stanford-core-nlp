@@ -41,7 +41,7 @@ module StanfordCoreNLP
       },
       
       :ner => {
-        :english => 'all.3class.distsim.crf.ser.gz'
+        :english => 'english.all.3class.distsim.crf.ser.gz'
         # :german => {} # Add this at some point.
       },
       
