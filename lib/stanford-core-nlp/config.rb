@@ -58,7 +58,8 @@ module StanfordCoreNLP
           'states' => 'state-abbreviations.txt',
           'countries' => 'countries', 
           'states.provinces' => 'statesandprovinces',
-          'extra.gender' => 'namegender.combine.txt'
+          'extra.gender' => 'namegender.combine.txt',
+          'singleton.predictor' => 'singleton.predictor.ser'
         },
         :german => {},
         :french  => {}
