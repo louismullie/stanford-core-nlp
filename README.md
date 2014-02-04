@@ -137,6 +137,14 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
 
+**Testing**
+
+To run the specs for each language (after copying the JARs into the `bin` folder): 
+
+    rake spec[english]
+    rake spec[german]
+    rake spec[french]
+
 **Contributing**
 
 Simple.
