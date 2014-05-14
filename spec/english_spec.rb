@@ -2,11 +2,8 @@
 require_relative 'spec_helper'
 
 describe StanfordCoreNLP do
-  
   context "when the whole pipeline is run on an English text" do
-    
     it "should get the correct sentences, tokens, POS tags, lemmas and syntactic tree" do
-      
       StanfordCoreNLP.use(:english)
       StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
       StanfordCoreNLP.set_model('parse.model', 'englishPCFG.ser.gz')
@@ -14,7 +11,7 @@ describe StanfordCoreNLP do
       pipeline = StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
       text = StanfordCoreNLP::Annotation.new(text)
       pipeline.annotate(text)
-      
+
       sentences, tokens, tags, lemmas, begin_char, last_char, name_tags, coref_ids = *get_information(text, true, true)
 
       sentences.should eql ['Angela Merkel met Nicolas Sarkozy on January 25th in Berlin to discuss a new austerity package.']
@@ -26,7 +23,28 @@ describe StanfordCoreNLP do
       name_tags.should eql ["PERSON", "PERSON", "O", "PERSON", "PERSON", "O", "DATE", "DATE", "O", "LOCATION", "O", "O", "O", "O", "O", "O", "O"]
       coref_ids.should eql ["", "1", "", "", "5", "", "3", "", "", "4", "", "", "", "", "", "6", ""]
     end
-    
   end
 
+  it "should use custom properties when set " do
+    StanfordCoreNLP.use(:english)
+    StanfordCoreNLP.custom_properties['ssplit.isOneSentence'] = 'true'
+    pipeline = StanfordCoreNLP.load(:tokenize, :ssplit)
+
+    text = 'Little my says hi.  Moomin says hi as well.'
+    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit)
+    annotation = StanfordCoreNLP::Annotation.new(text)
+    pipeline.annotate(annotation)
+    annotation.get(:sentences).size.should eql 1
+  end
+
+  it "should not use custom properties when not set " do
+    StanfordCoreNLP.use(:english)
+    StanfordCoreNLP.custom_properties = {}
+    pipeline = StanfordCoreNLP.load(:tokenize, :ssplit)
+    text = 'Little my says hi.  Moomin says hi as well.'
+    pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit)
+    annotation = StanfordCoreNLP::Annotation.new(text)
+    pipeline.annotate(annotation)
+    annotation.get(:sentences).size.should eql 2
+  end
 end

@@ -57,7 +57,7 @@ module StanfordCoreNLP
 
   require 'stanford-core-nlp/bridge'
   extend StanfordCoreNLP::Bridge
-  
+
   class << self
     # The model file names for a given language.
     attr_accessor :model_files
@@ -65,13 +65,17 @@ module StanfordCoreNLP
     attr_accessor :model_path
     # Store the language currently being used.
     attr_accessor :language
+    #Custom properties
+    attr_accessor :custom_properties
   end
+
+  self.custom_properties = {}
 
   # The path to the main folder containing the folders
   # with the individual models inside. By default, this
   # is the same as the JAR path.
   self.model_path = self.jar_path
-  
+
   # ########################### #
   # Public configuration params #
   # ########################### #
@@ -102,7 +106,7 @@ module StanfordCoreNLP
 
   # Use english by default.
   self.use :english
-  
+
   # Set a model file.
   def self.set_model(name, file)
     n = name.split('.')[0].intern
@@ -114,7 +118,7 @@ module StanfordCoreNLP
   # ########################### #
 
   def self.bind
-    
+
     # Take care of Windows users.
     if self.running_on_windows?
       self.jar_path.gsub!('/', '\\')
@@ -129,16 +133,16 @@ module StanfordCoreNLP
       klass = const_get(info.first)
       self.inject_get_method(klass)
     end
-  
+
   end
-  
+
   # Load a StanfordCoreNLP pipeline with the
   # specified JVM flags and StanfordCoreNLP
   # properties.
   def self.load(*annotators)
-    
+
     self.bind unless self.bound
-    
+
     # Prepend the JAR path to the model files.
     properties = {}
     self.model_files.each do |k,v|
@@ -156,7 +160,7 @@ module StanfordCoreNLP
       end
       properties[k] = f
     end
-    
+
     properties['annotators'] = annotators.map { |x| x.to_s }.join(', ')
 
     unless self.language == :english
@@ -168,45 +172,46 @@ module StanfordCoreNLP
       # Otherswise throws java.lang.NullPointerException: null.
       properties['parse.buildgraphs'] = 'false'
     end
-    
+
     # Bug fix for NER system. Otherwise throws:
     # Error initializing binder 1 at edu.stanford.
     # nlp.time.Options.<init>(Options.java:88)
     properties['sutime.binders'] = '0'
-    
+
     # Manually include SUTime models.
     if annotators.include?(:ner)
-      properties['sutime.rules'] = 
+      properties['sutime.rules'] =
       self.model_path + 'sutime/defs.sutime.txt, ' +
       self.model_path + 'sutime/english.sutime.txt'
     end
-    
+
     props = get_properties(properties)
-    
+
     # Hack for Java7 compatibility.
     bridge = const_get(:AnnotationBridge)
     bridge.getPipelineWithProperties(props)
 
   end
-  
+
   # Hack in order not to break backwards compatibility.
   def self.const_missing(const)
     if const == :Text
       puts "WARNING: StanfordCoreNLP::Text has been deprecated." +
       "Please use StanfordCoreNLP::Annotation instead."
       Annotation
-    else 
+    else
       super(const)
     end
   end
 
   private
-  
+
   # Create a java.util.Properties object from a hash.
   def self.get_properties(properties)
+    properties = properties.merge(self.custom_properties)
     props = Properties.new
     properties.each do |property, value|
-      props.set_property(property, value)
+      props.set_property(property.to_s, value.to_s)
     end
     props
   end
