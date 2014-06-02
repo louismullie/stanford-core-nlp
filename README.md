@@ -137,6 +137,19 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
 
+**Setting Annotator Options**
+
+The gem has support for setting Annotator options.  Annotator options change the default behavior of Stanford CoreNLP Annotaotrs.  See the Stanford CoreNLP documentation describing Annoator options here: http://nlp.stanford.edu/software/corenlp.shtml.
+For exmaple, the ssplit WordToSentenceAnnotator supports an option to control the treatment of line breaks in sentence detection.  From the Stanford CoreNLP documentation:
+
+> ssplit.newlineIsSentenceBreak: Whether to treat newlines as sentence breaks. This property has 3 legal values: "always", "never", or "two". The default is "two". "always" means that a newline is always a sentence break (but there still may be multiple sentences per line). This is often appropriate for texts with soft line breaks. "never" means to ignore newlines for the purpose of sentence splitting. This is appropriate when just the non-whitespace characters should be used to determine sentence breaks. "two" means that two or more consecutive newlines will be treated as a sentence
+
+You can set this and (any other supported Annotator option) like so:
+
+```ruby
+StanfordCoreNLP.custom_properties['ssplit.newlineIsSentenceBreak'] = 'always'
+```
+
 **Testing**
 
 To run the specs for each language (after copying the JARs into the `bin` folder):
