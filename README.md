@@ -1,7 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
 
 **About**
-  
+
 This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools for tokenization, sentence segmentation, part-of-speech tagging, lemmatization, and parsing of English, French and German. The package also provides named entity recognition and coreference resolution for English.
 
 This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1. It is tested on both Java 6 and Java 7.
@@ -71,7 +71,7 @@ text.get(:sentences).each do |sentence|
     puts token.get(:named_entity_tag).to_s
     # Coreference
     puts token.get(:coref_cluster_id).to_s
-    # Also of interest: coref, coref_chain, 
+    # Also of interest: coref, coref_chain,
     # coref_cluster, coref_dest, coref_graph.
   end
 end
@@ -81,7 +81,7 @@ end
 
 The Ruby symbol (e.g. `:named_entity_tag`) corresponding to a Java annotation class is the `snake_case` of the class name, with 'Annotation' at the end removed. For example, `NamedEntityTagAnnotation` translates to `:named_entity_tag`, `PartOfSpeechAnnotation` to `:part_of_speech`, etc.
 
-A good reference for names of annotations are the Stanford Javadocs for [CoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ling/CoreAnnotations.html), [CoreCorefAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/dcoref/CorefCoreAnnotations.html), and [TreeCoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/trees/TreeCoreAnnotations.html). For a full list of all possible annotations, see the `config.rb` file inside the gem. 
+A good reference for names of annotations are the Stanford Javadocs for [CoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ling/CoreAnnotations.html), [CoreCorefAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/dcoref/CorefCoreAnnotations.html), and [TreeCoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/trees/TreeCoreAnnotations.html). For a full list of all possible annotations, see the `config.rb` file inside the gem.
 
 
 **Loading specific classes**
@@ -90,12 +90,12 @@ You may want to load additional Java classes (including any class from the Stanf
 
 ```ruby
 # Default base class is edu.stanford.nlp.pipeline.
-StanfordCoreNLP.load_class('PTBTokenizerAnnotator')  
+StanfordCoreNLP.load_class('PTBTokenizerAnnotator')
 puts StanfordCoreNLP::PTBTokenizerAnnotator.inspect
   # => #<Rjb::Edu_stanford_nlp_pipeline_PTBTokenizerAnnotator>
 
 # Here, we specify another base class.
-StanfordCoreNLP.load_class('MaxentTagger', 'edu.stanford.nlp.tagger') 
+StanfordCoreNLP.load_class('MaxentTagger', 'edu.stanford.nlp.tagger')
 puts StanfordCoreNLP::MaxentTagger.inspect
   # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
 ```
@@ -139,12 +139,67 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 
 **Testing**
 
-To run the specs for each language (after copying the JARs into the `bin` folder): 
+To run the specs for each language (after copying the JARs into the `bin` folder):
 
     rake spec[english]
     rake spec[german]
     rake spec[french]
 
+**Using the latest version of the Stanford CoreNLP**
+
+To use the latest version of the Stanford CoreNLP (version 3.3.1 as of 6/1/2014) requires some additional manual steps:
+
+* Download [Stanford CoreNLP version 3.3.1](http://nlp.stanford.edu/software/stanford-corenlp-full-2014-01-04.zip) from http://nlp.stanford.edu/.
+* Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory location configured by setting the StanfordCoreNLP.jar_path.
+* Download [the full Stanford Tagger version 3.3.1](http://nlp.stanford.edu/software/stanford-postagger-full-2014-01-04.zip) from http://nlp.stanford.edu/..
+* Make a directory named 'taggers' inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
+* Place the contents of the extracted archive inside taggers directory created in the previous step.
+* Download [the bridge.jar file](https://github.com/louismullie/stanford-core-nlp/blob/master/bin/bridge.jar?raw=true) from https://github.com/louismullie/stanford-core-nlp.
+* Place the downloaded bridger.jar file inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/taggers/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
+* Configure your setup (for English) as follows:
+```ruby
+StanfordCoreNLP.use :english
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.3.1.jar',
+  'stanford-corenlp-3.3.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
+Or configure your setup (for French) as follows:
+```ruby
+StanfordCoreNLP.use :french
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.set_model('pos.model', 'french.tagger')
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.3.1.jar',
+  'stanford-corenlp-3.3.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
+Or configure your setup (for German) as follows:
+```ruby
+StanfordCoreNLP.use :german
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.set_model('pos.model', 'german-fast.tagger')
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.3.1.jar',
+  'stanford-corenlp-3.3.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
 **Contributing**
 
 Simple.
