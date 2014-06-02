@@ -147,13 +147,13 @@ To run the specs for each language (after copying the JARs into the `bin` folder
 
 **Using the latest version of the Stanford CoreNLP**
 
-To use the latest version of the Stanford CoreNLP (version 3.3.1 as of 6/1/2014) requires some additional manual steps:
+Using the latest version of the Stanford CoreNLP (version 3.3.1 as of 6/1/2014) requires some additional manual steps:
 
 * Download [Stanford CoreNLP version 3.3.1](http://nlp.stanford.edu/software/stanford-corenlp-full-2014-01-04.zip) from http://nlp.stanford.edu/.
-* Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory location configured by setting the StanfordCoreNLP.jar_path.
-* Download [the full Stanford Tagger version 3.3.1](http://nlp.stanford.edu/software/stanford-postagger-full-2014-01-04.zip) from http://nlp.stanford.edu/..
+* Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory location configured by setting StanfordCoreNLP.jar_path.
+* Download [the full Stanford Tagger version 3.3.1](http://nlp.stanford.edu/software/stanford-postagger-full-2014-01-04.zip) from http://nlp.stanford.edu/.
 * Make a directory named 'taggers' inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
-* Place the contents of the extracted archive inside taggers directory created in the previous step.
+* Place the contents of the extracted archive inside taggers directory.
 * Download [the bridge.jar file](https://github.com/louismullie/stanford-core-nlp/blob/master/bin/bridge.jar?raw=true) from https://github.com/louismullie/stanford-core-nlp.
 * Place the downloaded bridger.jar file inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/taggers/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
 * Configure your setup (for English) as follows:
