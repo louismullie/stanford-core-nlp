@@ -12,10 +12,10 @@ module StanfordCoreNLP
 
     # Folders inside the JAR path for the models.
     ModelFolders = {
-      :pos => 'taggers/',
-      :parse => 'grammar/',
-      :ner => 'classifiers/',
-      :dcoref => 'dcoref/'
+      :pos => 'edu/stanford/nlp/models/pos-tagger/english-left3words/',
+      :parse => '/edu/stanford/nlp/models/lexparser/',
+      :ner => '/edu/stanford/nlp/models/ner/',
+      :dcoref => '/edu/stanford/nlp/models/dcoref/'
     }
     
     # Tag sets used by Stanford for each language.
@@ -41,7 +41,7 @@ module StanfordCoreNLP
       },
       
       :ner => {
-        :english => 'all.3class.distsim.crf.ser.gz'
+        :english => 'english.all.3class.distsim.crf.ser.gz'
         # :german => {} # Add this at some point.
       },
       
@@ -351,7 +351,7 @@ module StanfordCoreNLP
         'ConstraintAnnotation'
       ],
 
-      'nlp.trees.semgraph.SemanticGraphCoreAnnotations' => [
+      'nlp.semgraph.SemanticGraphCoreAnnotations' => [
         'BasicDependenciesAnnotation',
         'CollapsedCCProcessedDependenciesAnnotation',
         'CollapsedDependenciesAnnotation'
