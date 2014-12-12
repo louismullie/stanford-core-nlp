@@ -9,14 +9,14 @@ It is only compatible with Stanford's  3.4.1 release and above. Serious repackag
 
 **Installing**
 
+NOTE:  Please see instructions on "using the latest version" below.   The packaging of the stanford version has changed.
+
 First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Two packages are available:
 
 * A [minimal package](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with the default tagger and parser models for English, French and German.
 * A [full package](http://louismullie.com/treat/stanford-core-nlp-full.zip), with all of the tagger and parser models for English, French and German, as well as named entity and coreference resolution models for English.
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
-You may also need to separately download stanford-postagger-2014-08-27.zip and inflate it in the bin folder (or your configured alternative) 
-Note, you will need to extract the contents of models.jar (currently stanford-corenlp-3.4.1-models.jar) in the bin folder. The Jar and its file structure are both accessed by the gem.
 
 **Configuration**
 
@@ -139,6 +139,72 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.singular' - 'singular.unigrams.txt'
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
+
+**Testing**
+
+To run the specs for each language (after copying the JARs into the `bin` folder):
+
+    rake spec[english]
+    rake spec[german]
+    rake spec[french]
+
+**Using the latest version of the Stanford CoreNLP**
+
+Using the latest version of the Stanford CoreNLP (version 3.4.1 as of 8/27/2014) requires some additional manual steps:
+
+* Download [Stanford CoreNLP version 3.4.1](http://nlp.stanford.edu/software/stanford-corenlp-full-2014-08-27.zip) from http://nlp.stanford.edu/.
+* Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory location configured by setting StanfordCoreNLP.jar_path.
+* Extract the contents of the stanford-corenlp-3.4.1-models.jar file in the bin folder.  The Jar and its exploded file structure are both accessed by the gem.  Note that if you are locating the stanford exploded model files outside
+*   the gem's bin folder, your StanfordCoreNLP.model_path should be set to the root of that file structure. 
+* Download [the full Stanford Tagger version 3.4.1](http://nlp.stanford.edu/software/stanford-postagger-2014-08-27.zip) from http://nlp.stanford.edu/.
+* Make a directory named 'taggers' inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
+* Place the contents of the extracted archive inside taggers directory.
+* Download [the bridge.jar file](https://github.com/louismullie/stanford-core-nlp/blob/master/bin/bridge.jar?raw=true) from https://github.com/louismullie/stanford-core-nlp.
+* Place the downloaded bridge.jar file inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/taggers/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
+* Configure your setup (for English) as follows:
+```ruby
+StanfordCoreNLP.use :english
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.4.1.jar',
+  'stanford-corenlp-3.4.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
+Or configure your setup (for French) as follows:
+```ruby
+StanfordCoreNLP.use :french
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.set_model('pos.model', 'french.tagger')
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.4.1.jar',
+  'stanford-corenlp-3.4.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
+Or configure your setup (for German) as follows:
+```ruby
+StanfordCoreNLP.use :german
+StanfordCoreNLP.model_files = {}
+StanfordCoreNLP.set_model('pos.model', 'german-fast.tagger')
+StanfordCoreNLP.default_jars = [
+  'joda-time.jar',
+  'xom.jar',
+  'stanford-corenlp-3.4.1.jar',
+  'stanford-corenlp-3.4.1-models.jar',
+  'jollyday.jar',
+  'bridge.jar'
+]
+end
+```
 
 **Contributing**
 
