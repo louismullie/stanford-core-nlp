@@ -2,7 +2,7 @@ require 'stanford-core-nlp/config'
 
 module StanfordCoreNLP
 
-  VERSION = '0.5.2'
+  VERSION = '0.5.3'
 
   require 'bind-it'
   extend BindIt::Binding
