@@ -13,9 +13,9 @@ module StanfordCoreNLP
     # Folders inside the JAR path for the models.
     ModelFolders = {
       :pos => 'taggers/',
-      :parse => '/edu/stanford/nlp/models/lexparser/',
-      :ner => '/edu/stanford/nlp/models/ner/',
-      :dcoref => '/edu/stanford/nlp/models/dcoref/'
+      :parse => 'grammar/',
+      :ner => 'classifiers/',
+      :dcoref => 'dcoref/'
     }
     
     # Tag sets used by Stanford for each language.
@@ -365,7 +365,8 @@ module StanfordCoreNLP
 
       'nlp.time.TimeExpression' => [
         'Annotation',
-        'ChildrenAnnotation'
+        'ChildrenAnnotation',
+        'TimeIndexAnnotation'
       ],
 
       'nlp.trees.TreeCoreAnnotations' => [
