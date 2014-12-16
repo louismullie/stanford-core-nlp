@@ -10,8 +10,8 @@ describe StanfordCoreNLP do
     StanfordCoreNLP.default_jars = [
       'joda-time.jar',
       'xom.jar',
-      'stanford-corenlp-3.3.1.jar',
-      'stanford-corenlp-3.3.1-models.jar',
+      'stanford-corenlp-3.5.0.jar',
+      'stanford-corenlp-3.5.0-models.jar',
       'jollyday.jar',
       'bridge.jar'
     ]
@@ -27,7 +27,7 @@ describe StanfordCoreNLP do
       sentences, tokens, tags, lemmas, begin_char, last_char = *get_information(text)
       sentences.should eql ["Du hast deiner Frau einen roten Ring gekauft."]
       tokens.should eql ["Du", "hast", "deiner", "Frau", "einen", "roten", "Ring", "gekauft", "."]
-      tags.should eql ["PPER", "VAFIN", "ADJA", "NN", "ART", "ADJA", "NN", "VVPP", "$."]
+      tags.should eql ["PPER", "VAFIN", "PPOSAT", "NN", "ART", "ADJA", "NN", "VVPP", "$."]
       lemmas.should eql ["du", "hast", "deiner", "frau", "einen", "roten", "ring", "gekauft", "."]
       begin_char.should eql [0, 3, 8, 15, 20, 26, 32, 37, 44]
       last_char.should eql [2, 7, 14, 19, 25, 31, 36, 44, 45]

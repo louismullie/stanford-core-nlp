@@ -9,8 +9,8 @@ describe StanfordCoreNLP do
     StanfordCoreNLP.default_jars = [
       'joda-time.jar',
       'xom.jar',
-      'stanford-corenlp-3.3.1.jar',
-      'stanford-corenlp-3.3.1-models.jar',
+      'stanford-corenlp-3.5.0.jar',
+      'stanford-corenlp-3.5.0-models.jar',
       'jollyday.jar',
       'bridge.jar'
     ]

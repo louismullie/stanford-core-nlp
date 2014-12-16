@@ -10,8 +10,8 @@ describe StanfordCoreNLP do
     StanfordCoreNLP.default_jars = [
       'joda-time.jar',
       'xom.jar',
-      'stanford-corenlp-3.3.1.jar',
-      'stanford-corenlp-3.3.1-models.jar',
+      'stanford-corenlp-3.5.0.jar',
+      'stanford-corenlp-3.5.0-models.jar',
       'jollyday.jar',
       'bridge.jar'
     ]
@@ -30,8 +30,8 @@ describe StanfordCoreNLP do
       tokens.should eql %w[Bonjour , je suis bel et bien arrivé au château . Le roi m ' a donné un biscuit .]
       #Old expectation that passes with the package avaible at http://louismullie.com/treat/stanford-core-nlp-full.zip
       # tags.should eql %w[I , CL V ADV C ADV V P N . D N N N V V D N .]
-      tags.should eql %w[I PUNC CL V ADV C ADV V P N PUNC D N N CL V V D N PUNC]
-      lemmas.should eql %w[bonjour , je sui bel et bien arrivé au château . le roi m ' a donné un biscuit .]
+      tags.should eql %w[I PUNC CLS V ADV C ADV VPP P NC PUNC DET NC NC ADJ V VPP DET NC PUNC]
+      lemmas.should eql %w[bonjour , je sui bel et bien arrivé au château . le rous m ' a donné un biscuit .]
       begin_char.should eql [0, 7, 9, 12, 17, 21, 24, 29, 36, 39, 46, 48, 51, 55, 56, 57, 59, 65, 68, 75]
       last_char.should eql [7, 8, 11, 16, 20, 23, 28, 35, 38, 46, 47, 50, 54, 56, 57, 58, 64, 67, 75, 76]
     end
