@@ -2,7 +2,7 @@ require 'stanford-core-nlp/config'
 
 module StanfordCoreNLP
 
-  VERSION = '0.5.1'
+  VERSION = '0.5.3'
 
   require 'bind-it'
   extend BindIt::Binding
@@ -29,9 +29,7 @@ module StanfordCoreNLP
   StanfordCoreNLP.default_jars = [
     'joda-time.jar',
     'xom.jar',
-    'stanford-parser.jar',
     'stanford-corenlp.jar',
-    'stanford-segmenter.jar',
     'jollyday.jar',
     'bridge.jar'
   ]

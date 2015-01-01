@@ -41,7 +41,7 @@ module StanfordCoreNLP
       },
       
       :ner => {
-        :english => 'all.3class.distsim.crf.ser.gz'
+        :english => 'english.all.3class.distsim.crf.ser.gz'
         # :german => {} # Add this at some point.
       },
       
@@ -58,7 +58,8 @@ module StanfordCoreNLP
           'states' => 'state-abbreviations.txt',
           'countries' => 'countries', 
           'states.provinces' => 'statesandprovinces',
-          'extra.gender' => 'namegender.combine.txt'
+          'extra.gender' => 'namegender.combine.txt',
+          'singleton.predictor' => 'singleton.predictor.ser'
         },
         :german => {},
         :french  => {}
@@ -351,7 +352,7 @@ module StanfordCoreNLP
         'ConstraintAnnotation'
       ],
 
-      'nlp.trees.semgraph.SemanticGraphCoreAnnotations' => [
+      'nlp.semgraph.SemanticGraphCoreAnnotations' => [
         'BasicDependenciesAnnotation',
         'CollapsedCCProcessedDependenciesAnnotation',
         'CollapsedDependenciesAnnotation'
@@ -364,7 +365,8 @@ module StanfordCoreNLP
 
       'nlp.time.TimeExpression' => [
         'Annotation',
-        'ChildrenAnnotation'
+        'ChildrenAnnotation',
+        'TimeIndexAnnotation'
       ],
 
       'nlp.trees.TreeCoreAnnotations' => [
