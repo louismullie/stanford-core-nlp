@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 require 'stanford-core-nlp'
 
@@ -18,9 +18,8 @@ recognition and coreference resolution for English. }
   s.files = Dir['lib/**/*'] + Dir['bin/**/*'] + ['README.md', 'LICENSE']
 
   # Runtime dependencies
-  s.add_runtime_dependency 'bind-it', '~>0.2.7'
+  s.add_runtime_dependency 'bind-it', '~> 0.2.7'
 
-  # Development dependency.
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rake'
+  # license
+  s.license = 'GPL-3.0'
 end
