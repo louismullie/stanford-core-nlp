@@ -5,6 +5,8 @@ describe StanfordCoreNLP do
   before(:each) do
     StanfordCoreNLP.jvm_args = ['-Xms2G', '-Xmx2G']
     StanfordCoreNLP.use :french
+    # @todo Hack! Change this!
+    StanfordCoreNLP.jar_path = File.dirname(__FILE__) + '/bin/'
     StanfordCoreNLP.model_files = {}
     StanfordCoreNLP.set_model('pos.model', 'french.tagger')
     StanfordCoreNLP.default_jars = [
