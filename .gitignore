@@ -4,3 +4,5 @@
 *swp
 *.gem
 bin/**
+.ruby-version
+
