@@ -11,3 +11,5 @@ before_script:
   - ls -lh spec/bin/taggers
 script:
   - rake spec
+notifications:
+  email: false
