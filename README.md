@@ -1,5 +1,4 @@
-# Stanford CoreNLP
-[![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
+# Stanford CoreNLP [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
 
 > Ruby bindings for the Stanford [CoreNLP Toolchain](http://stanfordnlp.github.io/CoreNLP/).
 
