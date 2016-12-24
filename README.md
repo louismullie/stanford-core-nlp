@@ -1,8 +1,7 @@
+# Stanford CoreNLP
 [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp)
 
-**This repository is under construction! Stay tuned!**
-
-**About**
+> Ruby bindings for the Stanford [CoreNLP Toolchain](http://stanfordnlp.github.io/CoreNLP/).
 
 This gem provides high-level Ruby bindings to the
 [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml),
@@ -14,14 +13,14 @@ This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
 It is tested on both Java 6 and Java 7.
 Newer Ruby version should work as well.
 
-**Installing**
+## Installation
 
 First, install the gem: `gem install stanford-core-nlp`.
 Then, download the Stanford Core NLP JAR and model files: [Stanford CoreNLP](http://nlp.stanford.edu/software/stanford-postagger-full-2014-10-26.zip)
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
 
-**Configuration**
+## Configuration
 
 You may want to set some optional configuration options. Here are some examples:
 
@@ -46,7 +45,7 @@ StanfordCoreNLP.log_file = 'log.txt'
 StanfordCoreNLP.set_model('pos.model', 'english-left3words-distsim.tagger')
 ```
 
-**Using the gem**
+## Using the gem
 
 ```ruby
 # Use the model files for a different language than English.
@@ -85,9 +84,13 @@ end
 
 > Important: You need to load the StanfordCoreNLP pipeline before using the StanfordCoreNLP::Annotation class.
 
-The Ruby symbol (e.g. `:named_entity_tag`) corresponding to a Java annotation class is the `snake_case` of the class name, with 'Annotation' at the end removed. For example, `NamedEntityTagAnnotation` translates to `:named_entity_tag`, `PartOfSpeechAnnotation` to `:part_of_speech`, etc.
+The Ruby symbol (e.g. `:named_entity_tag`) corresponding to a Java annotation
+class is the `snake_case` of the class name, with 'Annotation' at the end removed.
+For example, `NamedEntityTagAnnotation` translates to `:named_entity_tag`,
+`PartOfSpeechAnnotation` to `:part_of_speech`, etc.
 
-A good reference for names of annotations are the Stanford Javadocs for [CoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ling/CoreAnnotations.html), [CoreCorefAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/dcoref/CorefCoreAnnotations.html), and [TreeCoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/trees/TreeCoreAnnotations.html). For a full list of all possible annotations, see the `config.rb` file inside the gem.
+A good reference for names of annotations are the Stanford Javadocs
+for [CoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ling/CoreAnnotations.html), [CoreCorefAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/dcoref/CorefCoreAnnotations.html), and [TreeCoreAnnotations](http://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/trees/TreeCoreAnnotations.html). For a full list of all possible annotations, see the `config.rb` file inside the gem.
 
 
 **Loading specific classes**
@@ -106,7 +109,7 @@ puts StanfordCoreNLP::MaxentTagger.inspect
   # => <Rjb::Edu_stanford_nlp_tagger_maxent_MaxentTagger:0x007f88491e2020>
 ```
 
-**List of annotator classes**
+## List of annotator classes
 
 Here is a full list of annotator classes provided by the Stanford Core NLP package. You can load these classes individually using `StanfordCoreNLP.load_class` (see above). Once this is done, you can use them like you would from a Java program. Refer to the Java documentation for a list of functions provided by each of these classes.
 
@@ -125,7 +128,7 @@ Here is a full list of annotator classes provided by the Stanford Core NLP packa
 * DeterministicCorefAnnotator - implements anaphora resolution using a deterministic model.
 * NFLAnnotator - implements entity and relation mention extraction for the NFL domain.
 
-**List of model files**
+## List of model files
 
 Here is a full list of the default models for the Stanford Core NLP pipeline. You can change these models individually using `StanfordCoreNLP.set_model` (see above).
 
@@ -143,15 +146,17 @@ Here is a full list of the default models for the Stanford Core NLP pipeline. Yo
 * 'dcoref.states' - 'state-abbreviations.txt'
 * 'dcoref.extra.gender' - 'namegender.combine.txt'
 
-**Testing**
+## Testing
 
 To run the specs for each language (after copying the JARs into the `bin` folder):
 
-    rake spec[english]
-    rake spec[german]
-    rake spec[french]
+``` shell
+rake spec[english]
+rake spec[german]
+rake spec[french]
+```
 
-**Using the latest version of the Stanford CoreNLP**
+## Using the latest version of the Stanford CoreNLP
 
 Using the latest version of the Stanford CoreNLP (version 3.5.0 as of 31/10/2014) requires some additional manual steps:
 
@@ -206,7 +211,8 @@ StanfordCoreNLP.default_jars = [
 ]
 end
 ```
-**Contributing**
+
+## Contributing
 
 Simple.
 
