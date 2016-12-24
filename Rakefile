@@ -6,7 +6,7 @@ LANGUAGES = ['english', 'german', 'french']
 # because the language for the Stanford
 # Core NLP pipeline can only be set once.
 desc "Run specs for all defined languages: #{LANGUAGES.join(', ')}"
-task :spec, [:language] do |t, args|
+task :spec, [:language] do |_t, args|
   language_specs = []
   language = args.language
 
