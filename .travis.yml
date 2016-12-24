@@ -4,7 +4,11 @@ rvm:
 before_script:
   - env
   - wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-10-31.zip
-  - unzip -o stanford-corenlp-full-2014-10-31.zip -d bin/
+  - unzip stanford-corenlp-full-2014-10-31.zip
+  - mv stanford-corenlp-full-2014-10-31/* spec/bin/
+  - rm -r stanford-corenlp-full-2014-10-31
+  - cp bin/bridge.jar spec/bin
+  - ls -lah spec/bin
 script:
   - rake spec['english']
 notifications:
