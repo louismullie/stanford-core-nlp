@@ -1,15 +1,11 @@
 language: ruby
 rvm:
   - 2.3.1
-before_install:
-  - env
 before_script:
   - env
-  - echo 'Directory structure:'
-  - ls -1
-  - ls -lh spec/bin
-  - ls -lh spec/bin/taggers
+  - wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-10-31.zip
+  - unzip -o stanford-corenlp-full-2014-10-31.zip -d bin/
 script:
-  - rake spec
+  - rake spec['english']
 notifications:
   email: false
