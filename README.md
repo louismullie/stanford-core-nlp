@@ -4,16 +4,20 @@
 
 **About**
 
-This gem provides high-level Ruby bindings to the [Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml), a set natural language processing tools for tokenization, sentence segmentation, part-of-speech tagging, lemmatization, and parsing of English, French and German. The package also provides named entity recognition and coreference resolution for English.
+This gem provides high-level Ruby bindings to the
+[Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml),
+a set natural language processing tools for tokenization, sentence segmentation,
+part-of-speech tagging, lemmatization, and parsing of English, French and German.
+The package also provides named entity recognition and coreference resolution for English.
 
-This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1. It is tested on both Java 6 and Java 7.
+This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
+It is tested on both Java 6 and Java 7.
+Newer Ruby version should work as well.
 
 **Installing**
 
-First, install the gem: `gem install stanford-core-nlp`. Then, download the Stanford Core NLP JAR and model files. Two packages are available:
-
-* A [minimal package](http://louismullie.com/treat/stanford-core-nlp-minimal.zip) with the default tagger and parser models for English, French and German.
-* A [full package](http://louismullie.com/treat/stanford-core-nlp-full.zip), with all of the tagger and parser models for English, French and German, as well as named entity and coreference resolution models for English.
+First, install the gem: `gem install stanford-core-nlp`.
+Then, download the Stanford Core NLP JAR and model files: [Stanford CoreNLP](http://nlp.stanford.edu/software/stanford-postagger-full-2014-10-26.zip)
 
 Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
 
