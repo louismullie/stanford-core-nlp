@@ -1,0 +1,3 @@
+Things to be done in the `/bin` folder:
+- move code to `ext`;
+- introduce some `bootstrap` script to download binaries and models.
