@@ -10,8 +10,130 @@ The package also provides named entity recognition and coreference resolution
 for English.
 
 This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
-It is tested on both Java 6 and Java 7.
 Newer Ruby version should work as well.
+
+You need Java 8 for the latest CoreNLP version (since 3.5.0, 2014-10-31),
+earlier versions are tested on both Java 6 and Java 7.
+
+## Supported Human Languages
+
+We strive to support all languages Stanford CoreNLP
+[can](http://stanfordnlp.github.io/CoreNLP/human-languages.html) work with.
+
+<table>
+  <thead>
+    <tr>
+      <th>Annotator</th>
+      <th style="text-align: center">ar</th>
+      <th style="text-align: center">zh</th>
+      <th style="text-align: center">en</th>
+      <th style="text-align: center">fr</th>
+      <th style="text-align: center">de</th>
+      <th style="text-align: center">es</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tokenize / Segment</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>Sentence Split</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>Part of Speech</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>Lemma</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>Named Entities</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>Constituency Parsing</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>Dependency Parsing</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>Sentiment Analysis</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>Mention Detection</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>Coreference</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>Open IE</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Installation
 
