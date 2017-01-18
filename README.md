@@ -1,12 +1,13 @@
 # Stanford CoreNLP [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp) [![Awesome RubyNLP](https://img.shields.io/badge/Awesome-RubyNLP-brightgreen.svg)](https://github.com/arbox/nlp-with-ruby)
 
-> Ruby bindings for the Stanford [CoreNLP Toolchain](http://stanfordnlp.github.io/CoreNLP/).
+> Ruby bindings for the [Stanford CoreNLP Toolchain](http://stanfordnlp.github.io/CoreNLP/).
 
 This gem provides high-level Ruby bindings to the
-[Stanford Core NLP package](http://nlp.stanford.edu/software/corenlp.shtml),
+[Stanford CoreNLP](http://stanfordnlp.github.io/CoreNLP/) package,
 a set natural language processing tools for tokenization, sentence segmentation,
 part-of-speech tagging, lemmatization, and parsing of English, French and German.
-The package also provides named entity recognition and coreference resolution for English.
+The package also provides named entity recognition and coreference resolution
+for English.
 
 This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
 It is tested on both Java 6 and Java 7.
@@ -15,9 +16,11 @@ Newer Ruby version should work as well.
 ## Installation
 
 First, install the gem: `gem install stanford-core-nlp`.
-Then, download the Stanford Core NLP JAR and model files: [Stanford CoreNLP](http://nlp.stanford.edu/software/stanford-postagger-full-2014-10-26.zip)
+Then, download the Stanford Core NLP JAR and model files:
+[Stanford CoreNLP](http://nlp.stanford.edu/software/stanford-postagger-full-2014-10-26.zip)
 
-Place the contents of the extracted archive inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
+Place the contents of the extracted archive inside the `/bin/` folder of
+the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/).
 
 ## Configuration
 
@@ -110,7 +113,11 @@ puts StanfordCoreNLP::MaxentTagger.inspect
 
 ## List of annotator classes
 
-Here is a full list of annotator classes provided by the Stanford Core NLP package. You can load these classes individually using `StanfordCoreNLP.load_class` (see above). Once this is done, you can use them like you would from a Java program. Refer to the Java documentation for a list of functions provided by each of these classes.
+Here is a full list of annotator classes provided by the Stanford Core NLP package.
+You can load these classes individually using `StanfordCoreNLP.load_class`
+(see above). Once this is done, you can use them like you would from
+a Java program. Refer to the Java documentation for a list of functions provided
+by each of these classes.
 
 * PTBTokenizerAnnotator - tokenizes the text following Penn Treebank conventions.
 * WordToSentenceAnnotator - splits a sequence of words into a sequence of sentences.
@@ -213,7 +220,35 @@ end
 
 ## Contributing
 
-Simple.
+We are very glad to see you in this section and highly appreciate any help!
 
-1. Fork the project.
-2. Send me a pull request!
+If you want to contribute please agree that your work will be published
+under the terms of the `GPL v.3.0` license.
+
+Some of the open tasks for contributors are listed on the
+[issues](https://github.com/louismullie/stanford-core-nlp/issues) page.
+You may want to start there.
+
+Then feel free to fork the code and send us a pull request.
+
+## License
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) `stanford-core-nlp` by [Louis-Antoine Mullie](https://github.com/louismullie),
+[Andrei Beliankou](https://github.com/arbox) and
+[Contributors](https://github.com/louismullie/stanford-core-nlp/graphs/contributors).
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<!--- Links --->
+[ruby]: https://www.ruby-lang.org/en/
