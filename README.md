@@ -9,8 +9,8 @@ part-of-speech tagging, lemmatization, and parsing of English, French and German
 The package also provides named entity recognition and coreference resolution
 for English.
 
-This gem is compatible with Ruby 1.9.2 and 1.9.3 as well as JRuby 1.7.1.
-Newer Ruby version should work as well.
+This gem is compatible with Ruby `2.3` and `2.4` as well as JRuby `1.7` and `9`.
+Older Ruby version should work as well.
 
 You need Java 8 for the latest CoreNLP version (since 3.5.0, 2014-10-31),
 earlier versions are tested on both Java 6 and Java 7.
