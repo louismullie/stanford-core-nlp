@@ -1,4 +1,4 @@
-# Stanford CoreNLP [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp) [![Awesome RubyNLP](https://img.shields.io/badge/Awesome-RubyNLP-brightgreen.svg)](https://github.com/arbox/nlp-with-ruby)
+# Stanford CoreNLP [![Build Status](https://secure.travis-ci.org/louismullie/stanford-core-nlp.png)](http://travis-ci.org/louismullie/stanford-core-nlp) [![Awesome RubyNLP](https://img.shields.io/badge/Awesome-RubyNLP-brightgreen.svg)](https://github.com/arbox/nlp-with-ruby) [![Gem](https://img.shields.io/gem/v/formatador.svg)](https://rubygems.org/gems/stanford-core-nlp)
 
 > Ruby bindings for the [Stanford CoreNLP Toolchain](http://stanfordnlp.github.io/CoreNLP/).
 
