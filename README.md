@@ -297,7 +297,7 @@ Using the latest version of the Stanford CoreNLP (version 3.5.0 as of 31/10/2014
 * Make a directory named 'taggers' inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
 * Place the contents of the extracted archive inside taggers directory.
 * Download [the bridge.jar file](https://github.com/louismullie/stanford-core-nlp/blob/master/bin/bridge.jar?raw=true) from https://github.com/louismullie/stanford-core-nlp.
-* Place the downloaded bridger.jar file inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/taggers/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
+* Place the downloaded bridge.jar file inside the /bin/ folder of the stanford-core-nlp gem (e.g. [...]/gems/stanford-core-nlp-0.x/bin/) or inside the directory configured by setting StanfordCoreNLP.jar_path.
 * Configure your setup (for English) as follows:
 ```ruby
 StanfordCoreNLP.use :english
@@ -310,7 +310,6 @@ StanfordCoreNLP.default_jars = [
   'jollyday.jar',
   'bridge.jar'
 ]
-end
 ```
 Or configure your setup (for French) as follows:
 ```ruby
@@ -325,7 +324,6 @@ StanfordCoreNLP.default_jars = [
   'jollyday.jar',
   'bridge.jar'
 ]
-end
 ```
 Or configure your setup (for German) as follows:
 ```ruby
@@ -340,7 +338,6 @@ StanfordCoreNLP.default_jars = [
   'jollyday.jar',
   'bridge.jar'
 ]
-end
 ```
 
 ## Contributing
