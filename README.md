@@ -15,6 +15,9 @@ Older Ruby version should work as well.
 You need Java 8 for the latest CoreNLP version (since 3.5.0, 2014-10-31),
 earlier versions are tested on both Java 6 and Java 7.
 
+The version schema has been changed to reflect the development
+of Stanford CoreNLP itself. We'll release a gem for every new version from Stanford.
+
 ## Supported Human Languages
 
 We strive to support all languages Stanford CoreNLP
