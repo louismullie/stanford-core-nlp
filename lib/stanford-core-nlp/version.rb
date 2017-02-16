@@ -1,3 +1,3 @@
 module StanfordCoreNLP
-  VERSION = '0.5.3'
+  VERSION = '3.5.0.alpha'
 end

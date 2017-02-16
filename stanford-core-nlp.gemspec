@@ -6,8 +6,8 @@ require 'stanford-core-nlp/version'
 Gem::Specification.new do |s|
   s.name        = 'stanford-core-nlp'
   s.version     = StanfordCoreNLP::VERSION
-  s.authors     = ['Louis Mullie']
-  s.email       = ['louis.mullie@gmail.com']
+  s.authors     = ['Louis Mullie', 'Andrei Beliankou']
+  s.email       = ['arbox@yandex.ru']
   s.homepage    = 'https://github.com/louismullie/stanford-core-nlp'
   s.summary     = 'Ruby bindings to the Stanford Core NLP tools.'
   s.description = 'High-level Ruby bindings to the Stanford CoreNLP package, '\
@@ -24,4 +24,7 @@ Gem::Specification.new do |s|
 
   # license
   s.license = 'GPL-3.0'
+
+  # Post-install message.
+  s.post_install_message = 'This is an alpha release. Stay tuned!'
 end
