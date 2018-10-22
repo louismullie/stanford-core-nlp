@@ -373,6 +373,15 @@ module StanfordCoreNLP
         'TreeHeadTagAnnotation',
         'TreeHeadWordAnnotation',
         'TreeAnnotation'
+      ],
+
+      'nlp.naturalli.NaturalLogicAnnotations' => [
+        'OperatorAnnotation',
+        'PolarityAnnotation',
+        'PolarityDirectionAnnotation',
+        'EntailedSentencesAnnotation',
+        'EntailedClausesAnnotation',
+        'RelationTriplesAnnotation'
       ]
     }
 

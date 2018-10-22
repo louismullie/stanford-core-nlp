@@ -20,12 +20,12 @@ module StanfordCoreNLP::Bridge
         anno_class = "#{StanfordCoreNLP.camel_case(annotation)}Annotation"
         if anno_base
           unless StanfordNLP::Config::Annotations[anno_base]
-            raise "The path #{anno_base} doesn't exist."
+            raise "Path #{anno_base} doesn't exist."
           end
           anno_bases = [anno_base]
         else
           anno_bases = StanfordCoreNLP::Config::AnnotationsByName[anno_class]
-          raise "The annotation #{anno_class} doesn't exist." unless anno_bases
+          raise "Annotation #{anno_class} not found." unless anno_bases
         end
         if anno_bases.size > 1
           msg = "There are many different annotations bearing the name #{anno_class}." +
