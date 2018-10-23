@@ -355,7 +355,10 @@ module StanfordCoreNLP
       'nlp.semgraph.SemanticGraphCoreAnnotations' => [
         'BasicDependenciesAnnotation',
         'CollapsedCCProcessedDependenciesAnnotation',
-        'CollapsedDependenciesAnnotation'
+        'CollapsedDependenciesAnnotation',
+        'EnhancedDependenciesAnnotation',
+        'EnhancedPlusPlusDependenciesAnnotation',
+        'AlternativeDependenciesAnnotation'
       ],
 
       'nlp.time.TimeAnnotations' => [
