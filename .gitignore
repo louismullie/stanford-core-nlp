@@ -6,3 +6,4 @@
 bin/**
 .ruby-version
 spec/bin/
+.idea
