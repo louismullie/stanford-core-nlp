@@ -1,15 +1,22 @@
 language: ruby
 rvm:
-  - 2.3.1
+  - 2.7.0
+  - 2.6.5
+  - 2.5.7
+  - 2.4.9
 jdk:
-  - oraclejdk8
-  - openjdk8
+  - oraclejdk11
+  - openjdk11
 before_script:
   - wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-10-31.zip
   - unzip stanford-corenlp-full-2014-10-31.zip
   - mv stanford-corenlp-full-2014-10-31/* spec/bin/
   - rm -r stanford-corenlp-full-2014-10-31
   - cp bin/bridge.jar spec/bin
+  # rjb doesn't work with recent JDK versions. Temporary fix taken from:
+  # https://github.com/arton/rjb/issues/70
+  - sudo mkdir -p $JAVA_HOME/jre/lib/amd64/
+  - sudo ln -s $JAVA_HOME/lib/server $JAVA_HOME/jre/lib/amd64/server
 script:
   - rake spec['english']
 notifications:
