@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   # Add all files.
   s.files = Dir['lib/**/*'] + Dir['bin/**/*.java'] + ['README.md', 'LICENSE']
 
+  s.requirements << 'Stanford CoreNLP >= 3.5.0'
+
   # Runtime dependencies
   s.add_runtime_dependency 'bind-it', '~> 0.2.7'
 
